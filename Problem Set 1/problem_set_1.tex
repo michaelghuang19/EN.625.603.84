@@ -1,0 +1,174 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, graphicx, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.625.603.84\\
+      Problem Set \#1
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+\section*{2.2.4.}
+Suppose that two cards are dealt from a standard 52-card poker deck. Let A be the event that the sum of the two cards is 8 (assume that aces have a numerical value of 1). How many outcomes are in A?\@
+\\ \\
+To get a sum of 8, we can possibly have the following combinations of card values: \{1, 7\}, \{2,6\}, \{3,5\}, and \{4,4\}. There are 4 different options for suits for each of the card values in the first 3 combinations, which gives us \(4 \times 4 = 16\) different outcomes for each of these for a total of 48 outcomes. For the pair of 4s, we have the same limited set of 4 different options for suits, \({4 \choose 2} = \frac{4!}{2!2!} = 6\) outcomes. \\ 
+\@
+So the total is \(3 \times 16 + 6 = \fbox{\textbf{54 outcomes}}\).
+
+\section*{2.2.28.}
+Let events A and B and sample space S be defined as the following intervals: \\
+\( S = \{x : 0 \leq x \leq 10\} \) \\ 
+\( A = \{ x : 0 < x < 5 \} \) \\ 
+\( B = \{ x : 3 \leq x \leq 7 \} \) \\
+Characterize the following events:
+
+\subsection*{(a)} 
+\(A^C = \{ x : 5 \leq x \leq 10 \} \)
+
+\subsection*{(b)}
+\( A \cap B = \{ x : 3 \leq x < 5 \} \)
+
+\subsection*{(c)}
+\( A \cup B = \{ x : 0 < x \leq 7 \} \)
+
+\subsection*{(d)}
+\( A \cap B^C = \{ x : 0 < x < 3 \} \)
+
+\subsection*{(e)}
+\( A^C \cup B = \{ x : 5 \leq x \leq 7 \} \)
+
+\subsection*{(f)}
+\( A^C \cap B^C = \{ x : 7 < x \leq 10 \} \)
+
+\section*{2.2.40.} 
+For two events \(A\) and \(B\) defined on a sample space \(S, N(A \cap B^C) = 15, N(A^C \cap B) = 50\), and \(N(A \cap B) = 2\). Given that \(N(S) = 120\), how many outcomes belong to neither \(A\) nor \(B\)?\@
+\\ \\
+The equivalent to ``outcomes belonging to neither \(A\) nor \(B\)'' is simply \( P(A^C \cap B^C) \). We know that \( N(S) = N(A \cap B) + N(A \cap B^C) + N(A^C \cap B) + N(A^C \cap B^C) \). Replacing for the variables we know, we find that \\
+\( N(A^C \cap B^C) = N(S) - N(A \cap B) - N(A \cap B^C) - N(A^C \cap B) \) \\
+\( N(A^C \cap B^C) = 120 - 2 - 15 - 50 \) \\
+\( N(A^C \cap B^C) = \fbox{\textbf{53 outcomes}} \).
+
+\section*{2.3.2.} 
+Let A and B be any two events defined on S. Suppose that \(P(A) = 0.4, P(B) = 0.5\), and \(P(A \cap B) = 0.1\). What is the probability that A or B but not both occur?\@
+\\ \\ 
+The equivalent of ``\(A\) or \(B\) but not both occurring'' is simply \( P(A \cap B^C) + P(A^C \cap B) \). We also know that \( P(A) = P(A \cap B^C) + P(A \cap B) \) and \( P(B) = P(A^C \cap B) + P(A \cap B) \). Doing some simple algebra, we find that \\
+\( P (A \cap B^C) + P(B \cap A^C) = [P(A) - P(A \cap B)] + [P(B) - P(A \cap B)] \) \\
+\( P (A \cap B^C) + P(B \cap A^C) = [0.4 - 0.1] + [0.5 - 0.1] \) \\
+\( P (A \cap B^C) + P(B \cap A^C) =  \fbox{\textbf{0.7}} \)
+
+\section*{2.3.12.} 
+Events \(A_1\) and \(A_2\) are such that \(A_1 \cup A_2 = S\) and \(A_1 \cap A_2 = \emptyset \). Find \(p_2\) if \( P(A_1) = p_1, P(A_2) = p_2 \), and \( 3p_1 - p_2 = \frac{1}{2} \).\@
+\\ \\
+Since \(A_1 \cup A_2\) covers the entire sample space and \( A_1 \cap A_2 = \emptyset \), we know that \(A_1\) and \(A_2\) are both mutually exclusive and collectively exhaustive, that is, \(A_1 \cup A_2 = 1\) and \( p_1 + p_2 = 1 \). Given that \( 3p_1 - p_2 = \frac{1}{2} \), we can solve the following system of equations:
+
+\[
+\systeme{3p_1 - p_2 = \frac{1}{2}, p_1 + p_2 = 1}
+\]
+
+\[
+\systeme{p_2 = 3p_1 - \frac{1}{2}, 1 - p_2 = p_1}
+\]
+
+\[
+1 = 4p_1 - \frac{1}{2}
+\]
+
+\[
+4p_1 = \frac{3}{2}
+\]
+
+\[
+p_1 = \frac{3}{8}
+\]
+\\
+Therefore, \( p_2 = 1 - p_1 = 1 - \frac{3}{8} = \) \fbox{\(\mathbf{\frac{5}{8}}\)}.
+
+\section*{2.4.2.} 
+Find \(P(A \cap B)\) if \(P(A) = 0.2, P(B) = 0.4\), and \(P(A|B) + P(B|A) = 0.75\).\@
+\\ \\ 
+By definition of conditional probability that \(P(A|B) = \frac{P(A \cap B)}{P(B)} \) and \( P(B|A) = \frac{P(A \cap B)}{P(A)} \). Doing simple substitution with what we are given, we can find that \\
+\[ 
+\frac{P(A \cap B)}{P(B)} + \frac{P(A \cap B)}{P(A)} = 0.75 
+\]
+\[ 
+\frac{P(A \cap B)}{0.4} + \frac{P(A \cap B)}{0.2} = 0.75 
+\]
+\[ 
+\frac{P(A \cap B)}{0.4} + \frac{2P(A \cap B)}{0.4} = 0.75 
+\]
+\[ 
+\frac{3P(A \cap B)}{0.4} = 0.75 
+\]
+\[ 
+3P(A \cap B) = 0.75 \times 0.4
+\]
+Therefore, \( P(A \cap B) = 0.75 \times 0.4 \div 3 = \) \fbox{\textbf{0.1}}
+
+\section*{2.4.28.} 
+A telephone solicitor is responsible for canvassing three suburbs. In the past, 60\% of the completed calls to Belle Meade have resulted in contributions, compared to 55\% for Oak Hill and 35\% for Antioch. Her list of telephone numbers includes one thousand households from Belle Meade, one thousand from Oak Hill, and two thousand from Antioch. Suppose that she picks a number at random from the list and places the call. What is the probability that she gets a donation?
+\\
+\\ 
+Let \(D\) represent the event of a donation occurring, \(B\) represent the event that Belle Meade is picked, \(O\) represent the event that Oak Hill is picked, and \(A\) represent the event that Antioch is picked. The total probability is defined by the the total probabilities that a donation given that a specified suburb is picked multiplied by the probability that the suburb is picked outright, that is, for any suburb \(S, P(D) = P(D|S)P(S)\). \\ \\
+The total number of households is four thousand (one housand from Belle Meade, one thousand from Oak Hill, two thousand from Antioch), so we know that \(P(B) = \frac{1}{4}, P(O) = \frac{1}{4}, P(A) \frac{1}{2}\). Extrapolating the above, we can solve for the probability of getting a donation as follows: \\
+\[
+P(D)=P(D|B)P(B)+P(D|O)P(O)+P(D|A)P(A)
+\]
+\[
+P(D)=0.6 \times \frac{1}{4} + 0.55 \times \frac{1}{4} + 0.35 \times \frac{1}{2}
+\]
+\[
+P(D)= 0.15 + 0.1375 + 0.175
+\]
+\[
+P(D)= 0.4625
+\]
+Therefore, the probability of getting a donation is \fbox{\textbf{46.25\%}}.
+
+\section*{2.4.44.} 
+Two sections of a senior probability course are being taught. From what she has heard about the two instructors listed, Francesca estimates that her chances of passing the course are 0.85 if she gets Professor X and 0.60 if she gets Professor Y. The section into which she is put is determined by the registrar. Suppose that her chances of being assigned to Professor X are four out of ten. Fifteen weeks later we learn that Francesca did, indeed, pass the course.What is the probability she was enrolled in Professor X's section?
+\\ 
+\\ 
+Let \(X\) represent the event that Francesca was enrolled in Professor X's section, \(Y\) represent the vent that she was enrolled in Professor Y's section, and \(S\) represent that she successfully passed the course. We want to solve for \(P(X|S)\). By Bayes' theorem, we know that \(P(X|S) = \frac{P(S|X)P(X)}{P(S)}\). We know \(P(S|X)\) and \(P(X)\), so we must solve for \(P(S)\), or the probability of passing in this situation outright. This is composed of the probability of passing given assignment to each professor multiplied by the probability of getting assigned each professor, like so: \\ 
+\[
+P(S) = P(S|X)P(X) + P(S|Y)P(Y)
+\]
+\[
+P(S) = 0.85 \times 0.4 + 0.6 \times 0.6
+\tag*{As given}
+\]
+\[
+P(S) = 0.34 + 0.36
+\]
+\[
+P(S) = 0.7
+\]
+Substituting back, we find that \\
+\[
+P(X|S) = \frac{P(S|X)P(X)}{P(S)}
+\]
+\[
+P(X|S) = \frac{0.85 \times 0.4}{0.7} 
+\tag*{As determined}
+\]
+\[
+P(X|S) = \frac{0.34}{0.7} = \frac{17}{35} 
+\]
+Therefore, the probability that she was enrolled in Professor X's section is \fbox{\( \mathbf{\frac{17}{35} = \sim 48.57\%}\)}.
+
+% End of the large subsection
+}
+
+\end{document}
