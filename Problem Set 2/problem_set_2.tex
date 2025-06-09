@@ -22,13 +22,165 @@
 \thispagestyle{firstpageheader}
 {\Large 
 
-\section*{1}
+\section*{2.6.8.} 
+Recall the postal zip codes described in Example 2.6.5.
 
 \subsection*{(a)} 
+If viewed as nine-digit numbers, how many zip codes are greater than \(700,000,000\)?
+\\
+\\
+As nine-digit numbers, zip codes range from \(000000000\) to \(999999999\). To find how many zip codes are greater than \(700,000,000\), we first need to consider the first digit. The first digit can be \(7, 8\), or \(9\). Then, any of the remaining eight digits can be any digit from \(0\) to \(9\), which gives us 10 options per digit. We then need to subtract 1 for \(700,000,000\) itself, which is not greater thatn \(700,000,000\). Thus, we can find that the number of zip codes greater than \(700,000,000\) is:
+\[
+3 \times 10^8 - 1 = 300,000,000 - 1 = \fbox{\textbf{299,999,999}}
+\]
 
-\subsection*{(b)}
+\subsection*{(b)} 
+How many zip codes will the digits in the nine positions alternate between even and odd?
+\\ \\ 
+We can interpret alternating between even and odd to mean we can start with either an even or an odd digit, and then the following digits will flip back and forth between odd and even. From the digits 0 to 9, we have five even digits (0, 2, 4, 6, 8) and five odd digits (1, 3, 5, 7, 9). For either of these scenarios, we can see that we have 5 options for if the next digit is to be even or odd. This means that we can express the number of zip codes with alternating digits starting with an even or odd digit as \(5^9\), as we have 5 options for all 9 digits. We then multiply by 2 to account for the two cases of starting with an even or odd digit. Therefore, the total number of zip codes with alternating even/odd digits is:
+\[
+2 \times 5^9 = 2 \times 1,953,125 = \fbox{\textbf{3,906,250}}
+\]
 
-\subsection*{(c)}
+\subsection*{(c)} 
+How many zip codes will have the first five digits be all different odd numbers and the last four digits be two \(2\)'s and two \(4\)'s?
+\\
+\\
+We can break this down into two different parts: the first five digits and the last four digits.
+\\
+\\
+For the first five digits, we have five odd digits to choose from and we use all of them without replacement in order, which means that we have \(5! = 120\) different ways to arrange them. 
+\\
+\\
+For the last four digits, we have \(4!\) permutations for choosing and placing each digit in order without replacement, but since we have two \(2\)'s and two \(4\)'s, we need to divide this number of permutations by the number of ways to arrange the two pairs, which is \(2!\) for each pair. We can therefore find the number of arrangements for the last four digits as: 
+\[
+\frac{4!}{2! \times 2!} = \frac{24}{2 \times 2} = 6.
+\]\@
+\\
+Putting this all together, we can find the total number of zip codes that satisfy both conditions as:
+\[
+5! \times \frac{4!}{2! \times 2!} = 120 \times 6 = \fbox{\textbf{720}}
+\]
+
+\section*{2.6.41.} 
+In how many ways can the letters of the word
+ELEEMOSYNARY
+be arranged so that the \(S\) is always immediately followed by a \(Y\)?
+\\
+\\
+We can break this down to simplify the calculation of the permutations. First, we know that there are 12 letters in the word. We note that we have 3 \(E\)'s and 2 \(Y\)'s. In addition, we have the pair \(SY\) that must be together. We can first treat the pair \(SY\) as a single letter, which leaves us with 11 elements to arrange. Within this, we also need to account for the multiples by dividng by the number of ways in which we could arrange the \(E\)'s and \(Y\)'s, which is \(3!\) and \(2!\) respectively. We can therefore express the total number of arrangements more easily:
+\[
+\frac{11!}{3! \times 2!} = \frac{39,916,800}{6 \times 2} = \frac{39,916,800}{12} = \fbox{\textbf{3,326,400}}
+\]
+
+\section*{2.6.53.} 
+Nine students, five men and four women, interview for four summer internships sponsored by a city newspaper.
+
+\subsection*{(a)} 
+In how many ways can the newspaper choose a set of four interns?
+\\
+\\
+Since order does not matter, we can use the combination formula to find the number of ways:
+\[
+\binom{9}{4} = \frac{9!}{4!(9-4)!} = \frac{9!}{4!5!} = \frac{9 \times 8 \times 7 \times 6}{4 \times 3 \times 2 \times 1} = \frac{3024}{24} = \fbox{\textbf{126}}
+\]
+
+\subsection*{(b)} 
+In how many ways can the newspaper choose a set of four interns if it must include two men and two women in each set?
+\\
+\\
+We can break this down into two parts: choosing the men and choosing the women. Again, as order does not matter, we can use the combination formula for both. Since there are five men, this can be expressed as \(\binom{5}{2}\); with four women we can express this in the same way as \(\binom{4}{2}\). We can then multiply these two expressions together to find the total number of ways to get the total number of ways for both parts:
+\[
+\binom{5}{2} \times \binom{4}{2} = \frac{5!}{2!(5-2)!} \times \frac{4!}{2!(4-2)!} = \frac{5 \times 4}{2 \times 1} \times \frac{4 \times 3}{2 \times 1} = \frac{20}{2} \times \frac{12}{2} = 10 \times 6 = \fbox{\textbf{60}}
+\]
+
+\subsection*{(c)} 
+How many sets of four can be picked such that not everyone in a set is of the same sex?
+\\
+\\
+We can approach this more easily by first finding the total number of ways to choose four interns outright, and then subtracting the number of ways to choose four interns of the same sex. The only ways to choose four interns of the same sex are by choosing four interns from all five men and all four women, which can be expressed as \(\binom{5}{4}\) and \(\binom{4}{4}\). As previously calculated in part (a), the total number of ways to choose four interns is \(126\). We can put this all together: 
+\[
+126 - \binom{5}{4} - \binom{4}{4} = 126 - \frac{5!}{4!(5-4)!} - \frac{4!}{4!(4-4)!} = 126 - 5 - 1 =  \fbox{\textbf{120}}
+\]
+
+\section*{2.7.2.} 
+An urn contains six chips, numbered \(1\) through \(6\). Two are chosen at random and their numbers are added together. What is the probability that the resulting sum is equal to \(5\)?
+\\
+\\
+We can find this by taking the number of ways to choose two chips that sum to \(5\) and dividing it by the total number of ways to choose two chips from the urn. We explicitly don't care about order. The possible pairs that sum to \(5\) are \((1, 4)\), \((2, 3)\), which means there are 2 ways to choose two chips that sum to 5. We can use the combination formula to choose the total number of ways to choose two chips from the urn, reperesented as \(\binom{6}{2}\). We can therefore express the probability overall as \(\frac{2}{\binom{6}{2}} = \frac{2}{\frac{6!}{2!(6-2)!}} = \frac{2}{\frac{6 \times 5}{2 \times 1}} = \frac{2}{\frac{30}{2}} = \) \fbox{\(\mathbf{\frac{2}{15}}\)}
+
+\section*{3.2.11.} 
+If a family has four children, is it more likely they will have two boys and two girls or three of one sex and one of the other? Assume that the probability of a child being a boy is \(\frac{1}{2}\) and that the births are independent events.
+\\
+\\
+This situation can be modeled as a binomial distribution, with 4 trials and probability of success as \(\frac{1}{2}\). We can use the binomial formula and arbitrarily select one of the sexes as "success". Say we pick having a girl as "success". The probability of having two girls can therefore be expressed as: 
+\[
+P(X = 2) = \binom{4}{2} \left(\frac{1}{2}\right)^2 \left(\frac{1}{2}\right)^2 = \frac{4!}{2!(4-2)!} \times \frac{1}{4} \times \frac{1}{4} = \frac{12}{2} \times \frac{1}{16} = \frac{12}{32} = \frac{3}{8}
+\]
+\\
+The probability of having three of one sex and one of the other can be expressed as \(P(X = 3)\) and \(P(X = 1)\), for 3 girls and 1 boy and 3 boys and 1 girl, respectively. We can calculate both of these:
+\[
+P(X = 3) = \binom{4}{3} \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^1 = \frac{4!}{3!(4-3)!} \times \frac{1}{8} \times \frac{1}{2} = 4 \times \frac{1}{16} = \frac{4}{16} = \frac{1}{4}
+\]
+\[
+P(X = 1) = \binom{4}{1} \left(\frac{1}{2}\right)^1 \left(\frac{1}{2}\right)^3 = \frac{4!}{1!(4-1)!} \times \frac{1}{2} \times \frac{1}{8} = 4 \times \frac{1}{16} = \frac{4}{16} = \frac{1}{4}
+\]
+\\
+The total for the situation with three of one sex and one of the other, expressed as \(P(X = 3 \text{ or } X = 1) = P(X = 3) + P(X = 1) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}\).
+\\
+\\ 
+As \( \frac{1}{2} > \frac{3}{8}\), it is more likely that the family will have three children of one sex and one of the other.
+
+\section*{3.3.4.} 
+Suppose a fair die is tossed three times. Let \(X\) be the number of different faces that appear (so \(X = 1, 2\), or \(3\)). Find \(p_X(k)\).
+\\
+\\
+We can find \(p_X(k)\) by considering the different cases for \(X\). Overall, we know that there are \(6^3 = 216\) total outcomes when tossing a die three times. We can then find the probability of each case by counting the number of outcomes that satisfy each case and dividing by the total number of outcomes.
+\\
+For \(X = 1\), all three tosses must show the same faces. There are also 6 different options for faces. We can therefore express this situation as
+\\
+\[
+p_X(1) = \frac{6}{6^3} = \frac{6}{216} = \frac{1}{36}
+\]
+\\ 
+\\
+For \(X = 2\), we can have two of one face and one of another. We can choose the two faces in \(\binom{6}{2}\) ways. We also need to factor in that each of these pairings of two faces, we choose one that appears twice, which doubles the number of permutations. The arrangement of these two faces across three tosses can also be done in \(\binom{3}{2}\) ways. We can therefore express this situation as 
+\\
+\[
+p_X(2) = \frac{\binom{6}{2} \times 2 \times \binom{3}{2}}{6^3} = \frac{\frac{6!}{2!(6-2)!} \times 2 \times \frac{3!}{2!(3-2)!}}{6^3} = \frac{\frac{6 \times 5}{2} \times 2 \times \frac{3}{1}}{216} = \frac{15 \times 2 \times 3}{216} = \frac{90}{216} = \frac{5}{12}
+\]
+\\
+\\
+For \(X = 3\), all three faces must be different. As order  matters, we can use the permutations formula for picking 3 faces from 6 different faces to find the number of arrangements:
+\\ 
+\[
+p_X(3) = \frac{\frac{6!}{3!}}{6^3} = \frac{120}{216} = \frac{5}{9}
+\]
+
+\section*{3.3.14.} 
+At the points \(x = 0, 1, \ldots, 6\), the cdf for the discrete random variable \(X\) has the value \(F_X(x) = \frac{x(x + 1)}{42}\). Find the pdf for \(X\).
+\\
+\\
+We can use the relationship between the cdf and pdf; specifically, the pdf is simply the difference between the cdf at consecutive discrete points, i.e. \[p_X(x) = F_X(x) - F_X(x-1)\]
+\\
+We can calculate this in general for \(x\):
+\[p_X(x) = \frac{x(x + 1)}{42} - \frac{(x - 1)x}{42} = \frac{x^2 + x - (x^2 - x)}{42} = \frac{2x}{42} = \frac{x}{21}\]
+\\
+We can use this for all values of \(x\) in the range. For \(x = 0, 1, \ldots, 6\), \(p_X(x) = \frac{x}{21}\), and is 0 otherwise. Explicitly in the range:
+\\
+\(p_X(0) = \frac{0}{21} = 0\)
+\\
+\(p_X(1) = \frac{1}{21}\)
+\\
+\(p_X(2) = \frac{2}{21}\)
+\\
+\(p_X(3) = \frac{3}{21} = \frac{1}{7}\)
+\\
+\(p_X(4) = \frac{4}{21}\)
+\\
+\(p_X(5) = \frac{5}{21}\)
+\\
+\(p_X(6) = \frac{6}{21} = \frac{2}{7}\)
 
 % End of the large subsection
 }
