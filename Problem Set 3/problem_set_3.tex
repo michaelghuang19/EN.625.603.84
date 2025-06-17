@@ -1,0 +1,272 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, graphicx, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.625.603.84\\
+      Problem Set \#3
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{3.4.2} 
+For the random variable Y with pdf \(f_Y (y) = \frac{2}{3} + \frac{2}{3}y, 0 \leq y \leq 1\), find \(P(\frac{3}{4} \leq Y \leq 1)\).
+\\
+\\
+We can find \(P\) by integrating the pdf accordingly for the requisite range: 
+\[
+P(\frac{3}{4} \leq Y \leq 1) = \int_{\frac{3}{4}}^{1}f_Y(y)dy = \int_{\frac{3}{4}}^{1} (\frac{2}{3} + \frac{2}{3}y) dy
+\]
+\[
+= (\frac{2}{3}y + \frac{y^2}{3}) \Big|_{\frac{3}{4}}^{1} = (\frac{2}{3} + \frac{1}{3}) - (\frac{2}{3} \cdot \frac{3}{4} + \frac{\frac{3}{4}^2}{3}) = 1 - (\frac{1}{2} + \frac{3}{16}) = 1 - \frac{11}{16} = \fbox{\(\mathbf{\frac{5}{16}}\)} 
+\]
+
+\section*{3.4.12.} 
+The cdf for a random variable Y is defined by \(F_Y (y) = 0\) for \(y < 0; F_Y (y) = 4y^3 - 3y^4\) for \(0 \leq y \leq 1\); and \(F_Y (y) = 1\) for \(y > 1\). Find \(P(\frac{1}{4} \leq Y \leq \frac{3}{4})\) by integrating \(f_Y (y)\).
+\\
+\\
+We need to first find \(f_Y(y)\) by differentiating \(F_Y(y)\):
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y) = \frac{d}{dy} (4y^3 -3y^4) = 12y^2 - 12y^3
+\]
+We can then integrate \(f_Y(y)\) on the range:
+\[
+P(\frac{1}{4} \leq Y \leq \frac{3}{4}) = \int_{\frac{1}{4}}^{\frac{3}{4}}f_Y(y)dy = \int_{\frac{1}{4}}^{\frac{3}{4}} 12y^2 - 12y^3
+\]
+\[
+= (4y^3 - 3y^4) \Big|_{\frac{1}{4}}^{\frac{3}{4}} = (4 \cdot \frac{3}{4}^3 - 3 \cdot \frac{3}{4}^4) - (4 \cdot \frac{1}{4}^3 - 3 \cdot \frac{1}{4}^4) = (\frac{27}{16} - \frac{243}{256}) - (\frac{1}{16} - \frac{3}{256})
+\]
+\[
+= (\frac{432}{256} - \frac{243}{256}) - (\frac{16}{256} - \frac{3}{256})= \frac{189}{256} - \frac{13}{256} = \frac{176}{256} = \fbox{\(\mathbf{\frac{11}{16}}\)}
+\]
+
+\section*{3.4.14.} 
+In a certain country, the distribution of a family's disposable income, Y, is described by the pdf \(f_Y (y) = ye^{-y}, y \geq 0\). Find \(F_Y (y)\).
+\\
+\\
+To find \(F_Y(y)\), we need to integrate \(f_Y(y)\). We know from the information given that for \(y < 0, f_Y(y) = 0\), so \(F_Y(y) = 0\) in this case as well. We therefore just need to integrate for \(y \geq 0\).
+\[
+F_Y(y) = \int_{0}^{y} ye^{-y}dy
+\] 
+\[
+= -ye^{-y} - \int_{0}^{y} e^{-y}dy
+\tag*{Integration by parts, where \(u = y, dv = e^{-y}dy\)}
+\]
+\[
+= -ye^{-y} - (e^{-y}) \Big|_{0}^{y}
+\]
+\[
+= -ye^{-y} - (e^{-y} - e^{-0})
+\]
+\[
+= -ye^{-y} - e^{-y} + 1
+\]
+\[
+\fbox{\(\mathbf{1 - e^{-y}(y + 1)}\)}
+\]
+\\
+So \(F_Y(y) = 1 - e^{-y}(y + 1)\) for \(y \geq 0\), and 0 otherwise.
+
+\section*{3.6.5.} 
+Use Theorem 3.6.1 to find the variance of the random variable Y, where \(f_Y (y) = 3(1 - y)^2, 0 < y < 1\).
+\\
+\\
+The theorem states that Var(\(Y\)) = \(E(Y^2) - E(Y)^2\), as mean \(\mu_Y = E(Y)\). Let's calculate this directly:
+\[
+\text{Var}(Y) = E(Y^2) - E(Y)^2 
+\]
+\[
+= \int_{0}^{1} y^2 \cdot f_Y dy - [\int_{0}^{1} y \cdot f_Y dy]^2
+\]
+\[
+= \int_{0}^{1} y^2 \cdot 3(1 - y)^2 dy - [\int_{0}^{1} y \cdot 3(1 - y)^2 dy]^2
+\]
+\[
+= 3\int_{0}^{1} (y^2 + y^4 - 2y^3) dy - [3\int_{0}^{1} (y + y^3 - 2y^2) dy]^2
+\]
+\[
+= 3(\frac{y^3}{3} + \frac{y^5}{5} - \frac{2y^4}{4}) \Big|_{0}^{1} - [3(\frac{y^2}{2} + \frac{y^4}{4} - \frac{2y^3}{3}) \Big|_{0}^{1}]^2
+\]
+\[
+= 3(\frac{1}{3} + \frac{1}{5} - \frac{1}{2}) - [3(\frac{1}{2} + \frac{1}{4} - \frac{2}{3})]^2
+\]
+\[
+= 3(\frac{1}{30}) - [3(\frac{1}{12})]^2
+\]
+\[
+= \frac{1}{10} - \frac{1}{4}^2
+\]
+\[
+= \fbox{\(\mathbf{\frac{3}{80}}\)}
+\]
+
+\section*{3.7.8} 
+Consider the experiment of tossing a fair coin three times. Let X denote the number of heads on the last flip, and let Y denote the total number of heads on the three flips. Find \(p_{X,Y} (x, y)\).
+\\
+\\
+We have the following 8 outcomes, each with probability \(\frac{1}{8}\). For simplicity, let us denote each outcome and corresponding \((X, Y)\) pairing:
+\begin{itemize}
+  \item TTT, (0,0)
+  \item TTH, (1,1)
+  \item THT, (0,1)
+  \item THH, (1,2)
+  \item HTT, (0,1)
+  \item HTH, (1,2)
+  \item HHT, (0,2)
+  \item HHH, (1,3)
+\end{itemize}
+Doing some basic counting for each of the pairing possibilities, we can denote \(p_{X,Y} (x,y)\) as so: \\ 
+\[
+p_{X,Y}(x,y) = \begin{cases}
+\frac{1}{8} & \text{if } (x,y) = (0,0) \\
+\frac{1}{4} & \text{if } (x,y) = (0,1) \\
+\frac{1}{8} & \text{if } (x,y) = (0,2) \\
+0 & \text{if } (x,y) = (0,3) \\
+0 & \text{if } (x,y) = (1,0) \\
+\frac{1}{8} & \text{if } (x,y) = (1,1) \\
+\frac{1}{4} & \text{if } (x,y) = (1,2) \\
+\frac{1}{8} & \text{if } (x,y) = (1,3) \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\section*{3.7.13} 
+Find \(P(X < 2Y)\) if \(f_{X,Y} (x, y) = x + y\) for \(X\) and \(Y\) each defined over the unit interval.
+\\
+\\
+The unit interval is the square with corners at (0,0), (0,1), (1,0), and (1,1). \(P(X < 2Y)\) indicates the area above the range for the line running through it defined by \(x = 2y\), or \(y = \frac{x}{2}\) (as it is equivalent to \(y > \frac{x}{2}\)). We can take the integral according to the ranges, with one range being \(0 \leq y \leq \frac{1}{2}\) and \(0 \leq x < 2y\), and the other being \(\frac{1}{2} < y \leq 1\) and \(0 \leq x \leq 1\). We can then evaluate as follows: 
+\[
+P(X < 2Y) = \int \int_{x < 2y} f_{X,Y}(x,y)dxdy = \int \int_{x < 2y} (x+y) dxdy
+\]
+\[
+= \int_{0}^{\frac{1}{2}} \int_{0}^{2y} (x+y) dxdy + \int_{\frac{1}{2}}^{1} \int_{0}^{1} (x+y) dxdy
+\]
+\[
+= \int_{0}^{\frac{1}{2}} (\frac{x^2}{2} + xy) \Big|_{0}^{2y} dy + \int_{\frac{1}{2}}^{1} (\frac{x^2}{2} + xy) \Big|_{0}^{1} dy
+\]
+\[
+= \int_{0}^{\frac{1}{2}} (4y^2) dy + \int_{\frac{1}{2}}^{1} (\frac{1}{2} + y) dy
+\]
+\[
+= (\frac{4y^3}{3}) \Big|_{0}^{\frac{1}{2}} +  (\frac{y}{2} + \frac{y^2}{2}) \Big|_{\frac{1}{2}}^{1}
+\]
+\[
+= \frac{1}{6} + (\frac{1}{2} + \frac{1}{2} - \frac{1}{4} - \frac{1}{8})
+\]
+\[
+= \frac{1}{6} + \frac{5}{8} = \frac{8}{48} + \frac{30}{48} = \fbox{\(\mathbf{\frac{19}{24}}\)}
+\]
+
+\section*{3.7.17} 
+Find the marginal pdfs of \(X\) and \(Y\) for the joint pdf derived in Question 3.7.8.
+\\
+\\
+We take the marginal pdfs by just taking the sum of \(X\) and \(Y\) over the other respective variable, that is, \(p_X(x) = \sum_{y} p_{X,Y}(x, y)\) and \(p_Y(y) = \sum_{x} p_{X,Y}(x, y)\) respectively.
+\\
+\\
+For \(p_X(x)\), we can take the sums of all the instances in the combinations for the instances of \(x\). We see 4 instances out of 8 for \(x=0\) and the same for \(x=1\), so we can describe this as 
+\[
+p_X(x) = 
+\begin{cases}
+\frac{1}{2} & \text{if } x = 0 \\
+\frac{1}{2} & \text{if } x = 1 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+For \(p_Y(Y)\), we do the same -- we can take the sums of all the instances in the combinations for the instances of \(y\). We see 1 instances out of 8 for \(y=0\), 3 instances out of 8 for \(y=1\), 3 instances out of 8 for \(y=2\), and 1 instances out of 8 for \(y=3\), so we can describe this as 
+\[
+p_Y(y) = 
+\begin{cases}
+\frac{1}{8} & \text{if } y = 0 \\
+\frac{3}{8} & \text{if } y = 1 \\
+\frac{3}{8} & \text{if } y = 2 \\
+\frac{1}{8} & \text{if } y = 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\section*{3.7.31} 
+Given that \(F_{X,Y} (x, y) = k(4x^2y^2 + 5xy^4), 0 < x <1, 0 < y < 1\), find the corresponding pdf and use it to calculate \(P(0 < X < 1/2, 1/2 < Y < 1)\).
+\\
+\\
+We need to first find the value of \(k\). Given the CDF, we can solve for the equivalent of the max values being equal to 1, i.e. the end of the range contains the cumulative total probability which must be 1. We can thus say 
+\[
+F_{X,Y}(1,1) = 1
+\]
+\[
+k(4\cdot 1^2 \cdot 1^2 + 5 \cdot 1 \cdot 1^4) = 1
+\]
+\[
+k(4 + 5) = 1
+\]
+\[
+9k = 1
+\]
+So we know that \(k = \frac{1}{9}\). We now need to find the corresponding joint pdf, so we take the second partial derivative:
+\[
+f_{X,Y} (x,y) = \frac{\partial^2}{\partial x \partial y}F_{X,Y} (x,y) = \frac{\partial^2}{\partial x \partial y} \frac{1}{9}(4x^2y^2 + 5xy^4)
+\]
+\[
+= \frac{\partial}{\partial y} \frac{1}{9}(8xy^2 + 5y^4)
+\]
+\[
+= \frac{1}{9}(16xy + 20y^3)
+\]
+We can now calculate \(P\):
+\[
+P(0 < X < 1/2, 1/2 < Y < 1) = \int_{\frac{1}{2}}^{1} \int_{0}^{\frac{1}{2}} f_{X,Y} (x,y) dx dy = \int_{\frac{1}{2}}^{1} \int_{0}^{\frac{1}{2}} \frac{1}{9} (16xy + 20y^3) dx dy
+\]
+\[
+= \frac{1}{9} \int_{\frac{1}{2}}^{1} (8x^2y + 20xy^3) \Big|_{0}^{\frac{1}{2}} dy
+\]
+\[
+= \frac{1}{9} \int_{\frac{1}{2}}^{1} (2y + 10y^3) dy
+\]
+\[
+= \frac{1}{9} (y^2 + \frac{10y^4}{4}) \Big|_{\frac{1}{2}}^{1}
+\]
+\[
+= \frac{1}{9} (1 + \frac{5}{2} - \frac{1}{4} - \frac{10}{64}) = \frac{1}{9}(\frac{198}{64}) = \frac{198}{576} = \fbox{\(\mathbf{\frac{11}{32}}\)}
+\]
+
+
+\section*{3.8.4} 
+Suppose \(f_X (x) = xe^{-x}, x \geq 0\), and \(f_Y (y) = e^{-y}, y \geq 0\), where
+\(X\) and \(Y\) are independent. Find the pdf of \(X + Y\).
+\\
+\\
+By definition, as both \(X\) and \(Y\) are continuous and independent, we know that the pdf for \(W = X + Y\) is \(f_W(w) = \int_{-\infty}^{\infty}f_X(x)f_Y(w-x)dx\). We arbitrarily select variables as \(x\) and \(y\). By definition, we need to select limits such that both \(f_X(x) > 0\) and \(f_Y(w - x) > 0\), this indicates that \(x \geq 0 \) and \(w - x \geq 0\) i.e. \(x \leq w\) respectively. So we integrate on \(x\) from 0 to \(w\):
+\[
+f_W(w) = \int_{0}^{w} f_X(x)f_Y(w-x)dx = \int_{0}^{w} xe^{-x} \cdot e^{-(w-x)} dx
+\]
+\[
+= \int_{0}^{w} xe^{-x} \cdot e^{-w+x} dx = \int_{0}^{w} xe^{-x} \cdot e^{-w} \cdot e^x dx = \int_{0}^{w} x \cdot e^{-x} \cdot e^{-w} \cdot e^x dx
+\]
+\[
+= \int_{0}^{w} xe^{-w} dx
+\]
+\[
+= e^{-w}(\frac{x^2}{2}) \Big|_{0}^{w}
+\]
+\[
+= \fbox{\(\mathbf{\frac{w^2e^{-w}}{2}}\)}
+\]
+So for \(W = X + Y, f_W(w) = \frac{w^2e^{-w}}{2}\) for \(w \geq 0\) and 0 otherwise.
+
+% End of the large subsection
+}
+
+\end{document}
