@@ -1,0 +1,464 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, graphicx, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{
+      Michael Huang\\
+      EN.625.603.84\\
+      Midterm
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large
+
+\section*{1.}
+Suppose that a telephone number is 534-0826. If the first 3 digits of this number are written down in random order and then the last 4 digits of this number are written down in random order in an attempt to obtain the correct telephone number, what is the probability of each of the following events?
+
+\subsection*{(a)} 
+All 7 digits are correctly placed.
+\\
+\\
+We have two parts of correctly placing the numbers. The 3 digits are written down randomly at once and the last 4 digits are written down randomly at once -- there are 3! = 6 ways to order the first 3 digits and 4! = 24 ways to order the last 4 digits. These are done independently, one after another, and there is only one way to pick each of these correctly, so we therefore have \( \frac{1}{6} \cdot \frac{1}{24} = \fbox{\(\mathbf{\frac{1}{144}}\)} \) chance of correctly placing all 7 digits.
+
+\subsection*{(b)}
+The first 3 digits are correctly placed and only 2 of the remaining digits are incorrectly
+placed. 
+\\
+\\
+Like we found in section (a), there is \( \frac{1}{6} \) chance to pick the first 3 digits correctly. Then, for the second placement, we know there are 24 ways to place these digits, but of these remaining combinations, we have to pick 2 digits to be placed correctly, which is equivalent to \( \binom{4}{2} = \frac{4!}{2!(4-2)!} = \frac{4!}{2!2!} = 6 \) ways to pick the two digits to be placed correctly. Of the 2 remaining digits of the 4 digits, we have 2 ways to arrange them. However, one of these ways is the correct way to arrange them, which would mean 4 digits are correctly placed rather than 2 being correctly placed. As such, there is only 1 valid way to arrange each of these 6 ways to pick the two digits. This means the probability of satisfying the condition for the last 4 digits is \( \frac{6}{24} = \frac{1}{4} \). The total probability for the entire arrangement satisfying the condition is therefore \( \frac{1}{6} \cdot \frac{1}{4} = \fbox{\(\mathbf{ \frac{1}{24}}\)} \)
+
+\section*{2.}
+Given a collection of seven people, in which three are Data Science majors and four are ACM majors. If a committee of three people is picked at random, what is the probability that the committee contains one Data Science major and two ACM majors? 
+\\
+\\
+By definition, with a selection of 7 people from which we must select a committee of 3, there are a total of \( \binom{7}{3} = \frac{7!}{3!(7-3)!} = \frac{7!}{3!4!} = \frac{7 \cdot 6 \cdot 5}{6} = 35 \) ways to do so. We then need to find the ways to pick the combinations of people for the committee, of which there is 1 data science and 2 ACM majors. We therefore have a similar situation with choosing combinations, with \( \binom{3}{1} = \frac{3!}{1!(3-1)!} = \frac{3!}{1!2!} = 3 \) ways to choose the data science major and \( \binom{4}{2} = \frac{4!}{2!(4-2)!} = \frac{4!}{2!2!} = 6 \) ways to choose the ACM major; we multiply these together to find the number of unique ways to choose the combined arrangement, i.e. \( 3 \cdot 6 = 18 \) ways to pick the arrangement. Taking this out of the total number of ways to pick the committee overall gives the probability of satisfying the arrangement to be \( \fbox{\(\mathbf{ \frac{18}{35}}\)}\)
+
+\section*{3.}
+Ninety percent of the disk drives manufactured by the COMDISK Company are known to function properly. For a collection of 18 disk drives, find the probability that at least 15 function properly. 
+\\
+\\
+We can model this as a binomial situation, where disk drives function properly or not. We therefore need to find \( P(X \geq 15) = \sum_{i=15}^{18} P(k_i) \), where \(X\) indicates the number of functioning drives. We are given \(p = 0.9\), so we can set up the respective probability of \(k\) successes out of \(N=18\) disk drives to be \( P_N(k) = C(N,k)p^k{(1-p)}^{N-k} = C(18,k)0.9^k{(1-0.9)}^{18-k} = C(18,k)0.9^k0.1^{18-k} \). We can then evaluate as follows:
+\[
+P(X \geq 15) = \sum_{i=15}^{18} P(k_i) = P(X=15) + P(X=16) + P(X=17) + P(X=18)
+\]
+\[
+= C(18,15)0.9^{15}0.1^{3} + C(18,16)0.9^{16}0.1^{2} + C(18,17)0.9^{17}0.1^{1} + C(18,18)0.9^{18}0.1^{0}
+\]
+\[
+= \binom{18}{15}0.9^{15}0.1^{3} + \binom{18}{16}0.9^{16}0.1^{2} + \binom{18}{17}0.9^{17}0.1^{1} + \binom{18}{18}0.9^{18}0.1^{0}
+\]
+\[
+= (\frac{18!}{15!3!})0.9^{15}0.1^{3} + (\frac{18!}{16!2!})0.9^{16}0.1^{2} + (\frac{18!}{17!1!})0.9^{17}0.1^{1} + (\frac{18!}{18!0!})0.9^{18}0.1^{0}
+\]
+\[
+= \frac{18 \cdot 17 \cdot 16}{6} \cdot 0.9^{15}0.1^{3} + \frac{18 \cdot 17}{2} \cdot 0.9^{16}0.1^{2} + 18 \cdot 0.9^{17}0.1^{1} + 0.9^{18}0.1^{0}
+\]
+\[
+= 816 \cdot 0.9^{15}0.1^{3} + 153 \cdot 0.9^{16}0.1^{2} + 18 \cdot 0.9^{17}0.1^{1} + 0.9^{18}0.1^{0}
+\]
+\[
+= 816 \cdot 0.00020589113 + 153 \cdot 0.00185302018 + 18 \cdot 0.01667718169 + 0.15009463529 
+\]
+\[
+= 0.16800716208 + 0.28351208754 + 0.30018927042 + 0.15009463529
+\]
+\[
+= 0.90180315533
+\]
+So there is approximately a \fbox{\textbf{90.18\%}} chance of at least 15 disk drives functioning properly. 
+
+\section*{4.}
+A certain construction company buys 20\%, 30\%, and 50\% of their nails from hardware suppliers A, B, and C, respectively. Suppose it is known that 0.5\%, .02\%, and .01\% of the nails from A, B, and C respectively are defective. If a nail purchased by the construction company is defective, what is the probability that it came from supplier C?\@
+\\
+\\
+We can establish the following probabilities from the problem statement: \(P(A) = 0.2, P(B) = 0.3, P(C) = 0.5, P(D|A) = 0.005, P(D|B) = 0.0002, P(D|C) = 0.0001 \) with \( D \) indicating that a nail is defective. We want to find \( P(C|D) \). With this conditional probability, we can use Bayes' theorem which indicates that \( P(C|D) = \frac{P(D|C)P(C)}{P(D)} \). We have all values except \(P(D)\), which we can calculate by taking the product of the sum of probabilities of each supplier multiplied by their probabilities of being defective given their supplier. In other words, we can calculate the total probability of defectiveness due to the general multiplication rule:
+\[
+P(D) = P(A \cap D) + P(B \cap D) + P(C \cap D)
+\]
+\[
+= P(A)P(D|A) + P(B)P(D|B) + P(C)P(D|C)
+\]
+\[
+= 0.2 \cdot 0.005 + 0.3 \cdot 0.0002 + 0.5 \cdot 0.0001 
+\]
+\[
+= 0.001 + 0.00006 + 0.00005 = 0.00111
+\]
+Plugging this back in, we can find that 
+\[
+P(C|D) = \frac{P(D|C)P(C)}{P(D)} = \frac{0.0001 \cdot 0.5}{0.00111} = \frac{0.00005}{0.00111} = 0.04504504504
+\]
+So there is approximately a \fbox{\textbf{4.5\%}} chance that a defective nail came from supplier C.
+
+\section*{5.}
+Given a coin for which the probability of head on any toss is 3/5. The coin is tossed three times. Determine the probability function (i.e., the random variables' values and associated
+probabilities) for:
+
+\subsection*{(a)} 
+X, where X stands for the number of heads.
+\\
+\\
+We can model this as as a binomial situation with Bernoulli trials, where getting a heads denotes "success". We need to find \(P(X)\) for all possible values of \(X\) which range from 0 to 3. Modeling this using the binomial distribution, we can find 
+\[
+P_N(X=k) = \binom{N}{k}p^k{(1-p)}^{N-k} = \binom{3}{k}{(\frac{3}{5})}^k{(\frac{2}{5})}^{3-k} 
+\]
+Let's evaluate for each value of \(X=k\):
+\[
+P(X=0) = \binom{3}{0}{(\frac{3}{5})}^0{(\frac{2}{5})}^3 = \frac{3!}{0!3!} \cdot 1 \cdot \frac{8}{125} = 1 \cdot 1 \cdot \frac{8}{125} = \frac{8}{125}
+\]
+\[
+P(X=1) = \binom{3}{1}{(\frac{3}{5})}^1{(\frac{2}{5})}^2 = \frac{3!}{1!2!} \cdot \frac{3}{5} \cdot \frac{4}{25} = 3 \cdot \frac{3}{5} \cdot \frac{4}{25} = \frac{36}{125}
+\]
+\[
+P(X=2) = \binom{3}{2}{(\frac{3}{5})}^2{(\frac{2}{5})}^1 = \frac{3!}{2!1!} \cdot \frac{9}{25} \cdot \frac{2}{5} = 3 \cdot \frac{9}{25} \cdot \frac{2}{5} = \frac{54}{125}
+\]
+\[
+P(X=3) = \binom{3}{3}{(\frac{3}{5})}^3{(\frac{2}{5})}^0 = \frac{3!}{3!0!} \cdot \frac{27}{125} \cdot 1 = 1 \cdot \frac{27}{125} \cdot 1 = \frac{27}{125}
+\]
+and 0 otherwise. Put more succinctly:
+\[
+p_{X}(x) = \begin{cases}
+\frac{8}{125} & \text{if } X = 0 \\
+\frac{36}{125} & \text{if } X = 1 \\
+\frac{54}{125} & \text{if } X = 2 \\
+\frac{27}{125} & \text{if } X = 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection*{(b)} 
+Y, where y stands for the absolute value of the number of heads minus the number of tails.
+\\
+\\
+We have \(X\) as defined before being the number of heads. Because we either have just heads or tails, we can define the number of tails as being \(3-X\). Therefore, we can define \(Y = |X - (3 - X)| = |2X - 3|\). Looking at the possible values of \(Y\), we substitute for the values of \(X\):
+\[
+Y_{X=0} = |2 \cdot 0 - 3| = |0 - 3| = |-3| = 3
+\]
+\[
+Y_{X=1} = |2 \cdot 1 - 3| = |2 - 3| = |-1| = 1
+\]
+\[
+Y_{X=2} = |2 \cdot 2 - 3| = |4 - 3| = |1| = 1
+\]
+\[
+Y_{X=3} = |2 \cdot 3 - 3| = |6 - 3| = |3| = 3
+\]
+So the possible values are either 1 or 3. We can find the probabilities \(P(Y=k)\) using the previously found probability distribution \(P(X)\) since each of these values of \(Y\) correspond to events with those defined probabilities. So therefore we have:
+\[
+P(Y=1) = P(X=1) + P(X=2) = \frac{36}{125} + \frac{54}{125} = \frac{90}{125} = \frac{18}{25}
+\]
+\[
+P(Y=3) = P(X=0) + P(X=3) = \frac{8}{125} + \frac{27}{125} = \frac{35}{125} = \frac{7}{25}
+\]
+and 0 otherwise. Put more succinctly:
+\[
+p_{Y}(y) = \begin{cases}
+\frac{18}{25} & \text{if } Y = 1 \\
+\frac{7}{25} & \text{if } Y = 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\section*{6.}
+A coin is flipped, and a die is tossed simultaneously. Let X be the face of the coin (H = 0, T = 1).
+Let Y be the face of the die (1, 2, 3, 4, 5, 6).
+
+\subsection*{(a)}
+Calculate the joint probability distribution and show the values in a table.
+\\
+\\
+We need to calculate \(P(X = x, Y = y)\). We know that each value of \(x\) and \(y\) has unique values, and that these are done simultaneously and independently, so we can just multiply the probabilities of each respective \((x,y)\) pairing. In this case, since they are all unique values and fair objects, the probability for the 2 possibilities of the coin flip is \(\frac{1}{2}\), while the probability for the 6 possibilities of the die toss is \(\frac{1}{6}\), so the joint probability is just \(\frac{1}{2} \cdot \frac{1}{6} = \frac{1}{12}\) for each pairing. Presented as a table:
+
+\begin{center}
+\begin{tabular}{ | c | c | c | c | c | c | c | }
+\hline
+\(X=x, Y=y\) & 1 & 2 & 3 & 4 & 5 & 6 \\
+\hline
+0 (Heads) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) \\
+\hline
+1 (Tails) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) & \(\frac{1}{12}\) \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{(b)} 
+Let \(Z = X - XY + 2Y\) represent the payoff associated with each outcome. Find the pdf for Z.
+\\
+\\
+Looking at the distribution of \(Z\), we can do this a bit more easily by constructing a table of all possible values of \(X\) and \(Y\) to find the probability distribution.
+\begin{center}
+\begin{tabular}{ | c | c | c | c | }
+\hline
+\(X\) & \(Y\) & \(Z = X - XY + 2Y\) & \(p\) \\
+\hline
+0 & 1 & 0 - 0 + 2 = 2 & \(\frac{1}{12}\) \\
+\hline
+0 & 2 & 0 - 0 + 4 = 4 & \(\frac{1}{12}\) \\
+\hline
+0 & 3 & 0 - 0 + 6 = 6 & \(\frac{1}{12}\) \\
+\hline
+0 & 4 & 0 - 0 + 8 = 8 & \(\frac{1}{12}\) \\
+\hline
+0 & 5 & 0 - 0 + 10 = 10 & \(\frac{1}{12}\) \\
+\hline
+0 & 6 & 0 - 0 + 12 = 12 & \(\frac{1}{12}\) \\
+\hline
+1 & 1 & 1 - 1 + 2 = 2 & \(\frac{1}{12}\) \\
+\hline
+1 & 2 & 1 - 2 + 4 = 3 & \(\frac{1}{12}\) \\
+\hline
+1 & 3 & 1 - 3 + 6 = 4 & \(\frac{1}{12}\) \\
+\hline
+1 & 4 & 1 - 4 + 8 = 5 & \(\frac{1}{12}\) \\
+\hline
+1 & 5 & 1 - 5 + 10 = 6 & \(\frac{1}{12}\) \\
+\hline
+1 & 6 & 1 - 6 + 12 = 7 & \(\frac{1}{12}\) \\
+\hline
+\end{tabular}
+\end{center}
+We can group the terms accordingly and present it like so, summing the probabilities for those elements that are repeated:
+\[
+p_{Z}(z) = \begin{cases}
+\frac{1}{6} & \text{if } Z = 2 \\
+\frac{1}{12} & \text{if } Z = 3 \\
+\frac{1}{6} & \text{if } Z = 4 \\
+\frac{1}{12} & \text{if } Z = 5 \\
+\frac{1}{6} & \text{if } Z = 6 \\
+\frac{1}{12} & \text{if } Z = 7 \\
+\frac{1}{12} & \text{if } Z = 8 \\
+\frac{1}{12} & \text{if } Z = 10 \\
+\frac{1}{12} & \text{if } Z = 12 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\section*{7.}
+Given the joint pdf of X and Y given by \( f(x,y) = (\frac{1}{2})x^2y + (\frac{1}{3})y \) for \( 0 < x < 2; 0 < y < 1 \) and \( f(x,y) = 0 \), elsewhere. Determine the probability \( P(Y \leq X) \).
+\\
+\\
+To determine \(P(Y \leq X)\), we essentially need to take the area of the range from \(y \leq x\), so we can integrate over the full range from \((-\infty, \infty)\) within the valid range of \(x\), and then integrate from \((-\infty,x)\) within the valid range of \(y\). When doing this division in actual values, though, we find two distinct areas to integrate over:
+\( (0 < x < 1), (0 < y \leq x) \); \\
+\( (1 < x < 2), (0 < y < 1) \) due to \(y\) having an upper limit at 1 which means we cannot take the full range up to \(x\). \\
+We can set up the integrals as following:
+\[
+\int_{0}^{1} \int_{0}^{x} (\frac{1}{2})x^2y + (\frac{1}{3})y dy dx + \int_{1}^{2} \int_{0}^{1} (\frac{1}{2})x^2y + (\frac{1}{3})y dy dx
+\]
+\[
+= \int_{0}^{1} \int_{0}^{x} (\frac{1}{2}x^2y + \frac{1}{3}y) dy dx + \int_{1}^{2} \int_{0}^{1} (\frac{1}{2}x^2y + \frac{1}{3}y) dy dx
+\]
+\[
+= \int_{0}^{1} (\frac{1}{4}x^2y^2 + \frac{1}{6}y^2) \Big|_{0}^{x} dx + \int_{1}^{2} (\frac{1}{4}x^2y^2 + \frac{1}{6}y^2) \Big|_{0}^{1} dx
+\]
+\[
+= \int_{0}^{1} (\frac{1}{4}x^4 + \frac{1}{6}x^2) dx + \int_{1}^{2} (\frac{1}{4}x^2 + \frac{1}{6}) dx
+\]
+\[
+= (\frac{1}{20}x^5 + \frac{1}{18}x^3) \Big|_{0}^{1} + (\frac{1}{12}x^3 + \frac{1}{6}x) \Big|_{1}^{2}
+\]
+\[
+= \frac{1}{20} + \frac{1}{18} + (\frac{1}{12} \cdot 2^3 + \frac{1}{6} \cdot 2) - (\frac{1}{12} \cdot 1^3 + \frac{1}{6} \cdot 1)
+\]
+\[
+= \frac{1}{20} + \frac{1}{18} + \frac{2}{3} + \frac{1}{3} - \frac{1}{12} - \frac{1}{6}
+\]
+\[
+= \frac{1}{20} + \frac{1}{18} + \frac{2}{3} + \frac{1}{3} - \frac{1}{12} - \frac{1}{6}
+\]
+\[
+= \frac{38}{360} + 1 - \frac{1}{4} = \frac{308}{360} = \fbox{\(\mathbf{ \frac{77}{90} }\)}
+\]
+
+\section*{8.}
+A box contains two red, three green, and five blue chips. Two chips are selected from the box.
+Let \(X_1\) and \(X_2\) denote the number of red and green chips obtained.
+
+\subsection*{(a)} 
+Find the probabilities associated with all the possible pairs of values (\(x_1\) and \(x_2\)).
+\\
+\\
+Since we are only drawing two chips, the only possibilities of pairs \((x_1, x_2)\) are (0,0), (1,0), (1,1), (0,2). We can find the probability of getting each of these by counting the number of ways to get each possibility divided by the number of ways to pick 2 chips outright. We have 2 + 3 + 5 = 10 chips total, and we are picking 2 chips, so we have \(\binom{10}{2} = \frac{10!}{2!8!} = 45\) ways to pick 2 chips. Let's begin counting per possibility, by counting the number of chips we count per color, i.e. by calculating \( \binom{2}{r} \times \binom{3}{g} \times \binom{5}{b} \), where \(r\) indicates the number of red chips picked, \(g\) indicates the number of green chips picked, and \(b\) indicates the number of blue (neither red nor green) chips picked. 
+\\
+\\
+(0,0) = \( \binom{2}{0} \times \binom{3}{0} \times \binom{5}{2} = \frac{2!}{0!2!} \times \frac{3!}{0!3!} \times \frac{5!}{2!3!} = 1 \times 1 \times 10 = 10 \)
+\\
+(0,1) = \( \binom{2}{0} \times \binom{3}{1} \times \binom{5}{1} = \frac{2!}{0!2!} \times \frac{3!}{1!2!} \times \frac{5!}{1!4!} = 1 \times 3 \times 5 = 15 \)
+\\
+(1,0) = \( \binom{2}{1} \times \binom{3}{0} \times \binom{5}{1} = \frac{2!}{1!1!} \times \frac{3!}{0!3!} \times \frac{5!}{1!4!} = 2 \times 1 \times 5 = 10 \)
+\\
+(1,1) = \( \binom{2}{1} \times \binom{3}{1} \times \binom{5}{0} = \frac{2!}{1!1!} \times \frac{3!}{1!2!} \times \frac{5!}{0!5!} = 2 \times 3 \times 1 = 6 \)
+\\
+(0,2) = \( \binom{2}{0} \times \binom{3}{2} \times \binom{5}{0} = \frac{2!}{0!2!} \times \frac{3!}{2!1!} \times \frac{5!}{0!5!} = 1 \times 3 \times 1 = 3 \)
+\\
+(2,0) = \( \binom{2}{2} \times \binom{3}{0} \times \binom{5}{0} = \frac{2!}{2!0!} \times \frac{3!}{0!3!} \times \frac{5!}{2!3!} = 1 \times 1 \times 1 = 1 \)
+\\
+Put more succinctly:
+
+\[
+p_{X_1, X_2}(x_1, x_2) = \begin{cases}
+\frac{2}{9} & \text{if } (x_1, x_2) = (0,0) \\
+\frac{1}{3} & \text{if } (x_1, x_2) = (0,1) \\
+\frac{2}{9} & \text{if } (x_1, x_2) = (1,0) \\
+\frac{2}{15} & \text{if } (x_1, x_2) = (1,1) \\
+\frac{1}{15} & \text{if } (x_1, x_2) = (0,2) \\
+\frac{1}{45} & \text{if } (x_1, x_2) = (2,0) \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection*{(b)} 
+Determine the marginal probabilites associated with \(X_1\) and \(X_2\).
+\\
+\\
+We can find the marginal probabilities by just taking the sum of occurences of \(x_1\) and \(x_2\) over each respective variable, i.e. \( p_{X_1} (x_1) = \sum_{x_1} p_{X_1, X_2} (x_1, x_2)   \) and \( p_{X_2} (x_2) = \sum_{x_2} p_{X_1, X_2} (x_1, x_2) \) respectively.
+\\
+\\
+For \(x_1\), we take the sums for each respective value of \(x_1\). We count 10 + 15 + 3 = 28 for \(x_1 = 0\), 10 + 6 = 16 for \(x_1 = 0\), and 1 for \(x_1 = 2\). Taking each of these out of 45, we get 
+\[
+p_{X_1}(x_1) = \begin{cases}
+\frac{28}{45} & \text{if } x_1 = 0 \\
+\frac{16}{45} & \text{if } x_1 = 1 \\
+\frac{1}{45} & \text{if } x_1 = 2 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+For \(x_2\), we do the same for \(x_2\). We count 10 + 10 + 1 = 21 for \(x_2 = 0\), 15 + 6 = 21 for \(x_2 = 1\), and 3 for \(x_2 = 2\). Taking each of these out of 45, we get
+\[
+p_{X_2}(x_2) = \begin{cases}
+\frac{7}{15} & \text{if } x_2 = 0 \\
+\frac{7}{15} & \text{if } x_2 = 1 \\
+\frac{1}{15} & \text{if } x_2 = 2 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection*{(c)} 
+Determine the \( f_{x_2} (x_2 = 1 | x_1 = 0) \) 
+\\
+\\
+By definition for joint distributions, we know \(P_{Y|X}(y) = \frac{P(x,y)}{P_X(x)}\), which we can translate in this scenario to be \( f_{x_2} (x_2 = 1 | x_1 = 0) = \frac{f_{x_1, x_2} (x_1 = 0, x_2 = 1)}{f_{x_1} (x_1 = 0)} \). We know \( f_{x_1, x_2} (x_1 = 0, x_2 = 1) \) from part (a) to be \( \frac{1}{3} \) and \( f_{x_1} (x_1 = 0) \) from part (b) to be \( \frac{28}{45} \), so we can substitute:
+\[
+f_{x_2} (x_2 = 1 | x_1 = 0) = \frac{f_{x_1, x_2} (x_1 = 0, x_2 = 1)}{f_{x_1} (x_1 = 0)} = \frac{1}{3} \div \frac{28}{45} = \fbox{\(\mathbf{ \frac{15}{28} }\)}
+\]
+
+\section*{9.}
+In a gambling game, five fair coins are tossed. For a bet of \$5, a gambler will win \$10 if three heads occur. Otherwise, the gambler loses the \$5 bet. What is the expected gain for a typical bet of \$5.
+\\
+\\
+To calculate the expected value, we need to take the probabilities of the different situations and multiply by their respective payouts. The easiest way to do this is to find the probability of \(k=3\) heads out of \(N=5\) with \(p=\frac{1}{2}\) chance of heads for each flip and take the remainder from the total probability as the probability of losing. We can find this like so, using the binomial to set this up since we have binary successes/failures (heads/tails):
+\[
+P_N(X=k) = \binom{N}{k}p^k{(1-p)}^{N-k} = \binom{5}{3} {(\frac{1}{2})}^3 {(\frac{1}{2})}^2
+\]
+\[
+= \frac{5!}{3!2!} \cdot \frac{1}{8} \cdot \frac{1}{4} = 10 \cdot \frac{1}{32} = \frac{5}{16}
+\]
+We can now set up our expectation calculation:
+\[
+E(X) = \frac{5}{16} \cdot 10 + (1 - \frac{5}{16}) \cdot -5 = \frac{50}{16} - \frac{55}{16} = -\frac{5}{16}
+\]
+So our expected gain for a typical bet of \$5 is \fbox{\textbf{-\$0.3125}}
+
+\section*{10.}
+In a certain country the heights for adult males are normally distributed with a mean of 68 inches and a standard deviation of 4 inches. Let X symbolize the height.
+
+\subsection*{(a)} 
+Determine the probability \( P(66 < X < 73) \).
+\\
+\\
+We can determine this with the normal distribution around 68 and mean of 4, i.e. \( X \sim N(68, 4^2) \). Using the general normal approximation and a calculator to evaluate \(F_Z\), we know this to be 
+\[
+P(66 < X < 73) = F_Z(\frac{73 - 68}{4}) - F_Z(\frac{66 - 68}{4}) = F_Z(\frac{5}{4}) - F_Z(-\frac{1}{2})
+\]
+\[
+= 0.8944 - 0.3085 = 0.5859
+\]
+So thee probability is \fbox{\textbf{58.59\%}}
+
+\subsection*{(b)} 
+Determine the height which represents the 90th percentile.
+\\
+\\
+Using the general normal distribution, we can find the value \(X\) for which taking \(F_Z(Z) = 0.9\), or \(Z \approx 1.28 \). We can set this up as 
+\[
+\frac{X - \mu}{\sigma} = Z
+\]
+\[
+\frac{X - 68}{4} = 1.28
+\]
+\[
+X - 68 = 5.12
+\]
+\[
+X = 73.12
+\]
+So the height which represents the 90th percentile is \fbox{\textbf{73.12}}
+
+\section*{11.}
+Given that \( f(x) = ke^{-x/3} \) for \( x > 0 \), and \( f(x) = 0 \) elsewhere.
+
+\subsection*{(a)} 
+Determine k.
+\\
+\\
+To determine \( k \), we need to integrate the given probability function and equal it to 1, since the area under the probability function must sum up to 1 by definition. We can set this up as follows, setting the limits for where \(x\) is valid:
+\[
+\int_{-\infty}^{\infty} f(x) dx = 1
+\]
+\[
+\int_{0}^{\infty} ke^{-x/3} dx = 1
+\]
+Substitute \( u = x/3 \). Therefore \(x = 3u\) and \(dx = 3du\):
+\[
+\int_{0}^{\infty} ke^{-u} 3 du
+\]
+\[
+(3ke^{-u} \cdot -1) \Big|_{0}^{\infty} = 1
+\]
+\[
+-3ke^{-u} \Big|_{0}^{\infty} = 1
+\]
+\[
+-3ke^{-\infty} - (-3ke^{0}) = 1
+\]
+\[
+0 - (-3k) = 1
+\]
+\[
+k = \fbox{\(\mathbf{ \frac{1}{3}}\)}
+\]
+
+\subsection*{(b)} 
+Determine the CDF of X.
+\\
+\\
+To determine the CDF, we simply need to take the integral of the the PDF with our newfound \(k\). We can take the integral from 0 to x to find this (as \(f(x)\) is simply 0 for all \(x \leq 0\), so the CDF for that situation is simply 0):
+\[
+F(x) = \int_{0}^{x} f(x) dx = \int_{0}^{x} \frac{e^{-x/3}}{3} dx
+\]
+Again, substitute and take \(u = x/3, x = 3u, dx = 3du\):
+\[
+= \int_{0}^{x/3} \frac{e^{-u}}{3} 3du = \int_{0}^{x/3} e^{-u}du
+\]
+\[
+= -e^{-u} \Big|_{0}^{x/3}
+\]
+\[
+= -e^{-x/3} - (-e^0) = -e^{-x/3} - (-1) = 1 - e^{-x/3}
+\]
+So we have \fbox{\(F(x) = 1 - e^{-x/3} \) \text{for} \(x > 0\) \text{and 0 otherwise}}.
+
+% End of the large subsection
+}
+
+\end{document}
