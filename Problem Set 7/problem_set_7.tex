@@ -1,0 +1,275 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, graphicx, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.625.603.84\\
+      Problem Set \#7
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{9.2.12}
+
+Suppose that \(H_0: \mu_X = \mu_Y\) is being tested against \(H_1: \mu_X \neq \mu_Y\), where \(\sigma^2_X\) and \(\sigma^2_Y\) are known to be 17.6 and 22.9, respectively. If \(n = 10, m = 20, \bar{x} = 81.6\), and \(\bar{y} = 79.9\), what \(P\)-value would be associated with the observed \(Z\) ratio?
+\\
+\\
+We have \(\sigma^2_X = 17.6\) and \(\sigma^2_Y = 22.9\). We can plug to find the z-test statistic under the null hypothesis with known variances: 
+\[
+z = \frac{\bar{x} - \bar{y}}{\sqrt{\frac{\sigma^2_X}{n} + \frac{\sigma^2_Y}{m}}} = \frac{81.6 - 79.9}{\sqrt{\frac{17.6}{10} + \frac{22.9}{20}}} = \frac{1.7}{\sqrt{\frac{58.1}{20}}} = \frac{1.7}{\sqrt{2.905}} = \frac{1.7}{1.70440605491} = 0.99741490304
+\]
+Since this is a two-tailed test, we take both tails using 0.99741490304 and look up the corresponding value in a table to be 
+\[
+2 \cdot (1 - 0.84134) = 2 \cdot 0.15866 = 0.31732
+\]
+
+\section*{9.2.15}
+
+If \(X_1, X_2, \dots, X_n\), and \(Y_1, Y_2, \dots, Y_m\) are independent random samples from normal distribution with the same \(\sigma^2\), prove that their pooled sample variance, \(S^2_p\), is an unbiased estimator for \(\sigma^2\).
+\\
+\\
+By definition, we know that \(S^2_p = \frac{(n-1)S^2_X + (m-1)S^2_Y}{n + m - 2}\). We can check the unbiasedness by seeing if \(E(S^2_p) = \sigma^2\):
+\[
+E(S^2_p) = E(\frac{(n-1)S^2_X + (m-1)S^2_Y}{n + m - 2})
+\]
+\[
+= \frac{n-1}{n + m - 2} E(S^2_X) + \frac{m-1}{n + m - 2} E(S^2_Y) 
+\]
+\[
+= \frac{n-1}{n + m - 2} \sigma^2 + \frac{m-1}{n + m - 2} \sigma^2 
+\]
+\[
+= \frac{n - 1 + m - 1}{n + m - 2} \sigma^2
+\]
+\[
+= \frac{n + m - 2}{n + m - 2} \sigma^2
+\]
+\[
+= 1 \cdot \sigma^2 = \sigma^2
+\]
+which therefore shows that \(S^2_p\) is indeed an unbiased estimator for \(\sigma^2\).
+
+\section*{9.2.17}
+
+A person exposed to an infectious agent, either by contact or by vaccination, normally develops antibodies to that agent. Presumably, the severity of an infection is related to the number of antibodies produced. The degree of antibody response is indicated by saying that the person's blood serum has a certain \(titer\), with higher titers indicating greater concentrations of antibodies. The following table gives the titers of twenty-two persons involved in a tularemia epidemic in Vermont (21). Eleven were quite ill; the other eleven were asymptomatic. Use Theorem 9.2.3 to test \(H_0: \mu_X = \mu_Y\) against a one-sided \(H_1\) at the 0.05 level of significance. The sample standard deviations for the “Severely Ill”and “Asymptomatic” groups are 428 and 183, respectively.
+\\
+\\
+We are given that \(\alpha = 0.05\), \(S_X = 428\), \(S_Y = 183\), and counting the observations we can find that \(m = n = 11\). We are told to test against \(H_1: \mu_X > \mu_Y\). We use Theorem 9.2.3, Welch's t-test. We find the means to be as follows:
+\[
+\bar{X} = \frac{640 + 80 + 1280 + 160 + 640 + 640 + 1280 + 640 + 160 + 320 + 160}{11} = \frac{6000}{11} = 545.454545455
+\]
+\[
+\bar{Y} = \frac{10 + 320 + 320 + 320 + 320 + 80 + 160 + 10 + 640 + 160 + 320}{11} = \frac{2660}{11} = 241.818181818
+\]
+and plug into the formula:
+\[
+t = \frac{\bar{X} - \bar{Y}}{\sqrt{\frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y}}} = \frac{545.454545455 - 241.818181818}{\sqrt{\frac{428^2}{11} + \frac{183^2}{11}}}
+\]
+\[
+= \frac{303.636363637}{\sqrt{\frac{183184 + 33489}{11}}} = \frac{303.636363637}{\sqrt{\frac{216673}{11}}} = \frac{303.636363637}{\sqrt{19697.5454545}} = \frac{303.636363637}{140.347944248} = 2.16345430112
+\]
+We need to then determine \(df = v\):
+\[
+v = \frac{(\frac{S^2_X}{n_X} + \frac{S^2_Y}{n_Y})^2}{\frac{1}{n_X - 1}(\frac{S^2_X}{n_X})^2 + \frac{1}{n_Y - 1}(\frac{S^2_Y}{n_Y})^2} = \frac{(\frac{428^2}{11} + \frac{183^2}{11})^2}{\frac{1}{11 - 1}(\frac{428^2}{11})^2 + \frac{1}{11 - 1}(\frac{183^2}{11})^2}
+\]
+\[
+= \frac{19697.5454545^2}{\frac{1}{10}(\frac{183184}{11})^2 + \frac{1}{10}(\frac{33489}{11})^2} = \frac{387993296.932}{\frac{ 16653.0909091^2 + 3044.45454545^2}{10}}
+\]
+\[
+= \frac{387993296.932}{\frac{286594140.306}{10}} = \frac{387993296.932}{28659414.0306} = 13.5380750115
+\]
+Rounding up, we can take this as \(v = 13\). Looking this up in a table for \(t_{0.05, 13} = 1.771\). Given that we have \(2.16345430112 > 1.771\), we therefore reject \(H_0\) in this case and find that there is a statistically significant increase in mean titers in severely ill persons relative to asymptomatic persons.
+
+\section*{9.2.18}
+
+For the approximate two-sample \(t\) test described in Question 9.2.17, it will be true that 
+\[
+v < n + m - 2
+\]
+Why is that a disadvantage for the approximate test? That is, why is it better to use the Theorem 9.2.1 version of the \(t\) test if, in fact, \(\sigma^2_X = \sigma^2_Y\)?
+\\
+\\
+\(v < n + m - 2\) inherently indicates that the degrees of freedom will be less than the dfs we could have we could assume that the SDs are equal in the pooled two-sample \(t\) test, i.e. \(\sigma^2_X = \sigma^2_Y\). Looking at each equation for determining critical values, it is clear that having a smaller df leads to larger critical t-values, which means that it is more difficult to reach those values and reject the null hypothesis, which in turn makes the test less useful. As such, we would want to use this pooled version when we are able to rather than the approximation.
+
+\section*{9.3.3}
+
+Among the standard personality inventories used by psychologists is the thematic apperception test (TAT) in which a subject is shown a series of pictures and is asked to make up a story about each one. Interpreted properly, the content of the stories can provide valuable insights into the subject's mental well-being. The following data show the TAT results for forty women, twenty of whom were the mothers of normal children and twenty the mothers of schizophrenic children. In each case the subject was shown the same set of ten pictures. The figures recorded were the numbers of stories (out of ten) that revealed a \(positive\) parent-child relationship, one where the mother was clearly capable of interacting with her child in a flexible, open-minded way (210).
+
+\subsection*{(a)}
+
+Test \(H_0: \sigma^2_X = \sigma^2_Y\) versus \(H_1: \sigma^2_X \neq \sigma^2_Y\), where \(\sigma^2_X\) and \(\sigma^2_Y\) are the variances of the scores of mothers of normal children and scores of mothers of schizophrenic children, respectively. Let \(\alpha = 0.05\).
+\\
+\\
+As we are testing variances, we need to set up an F-test and use the ratio of the sample variances of the samples. We need to first find sample variances of the data, which we do using Python but we can do normally as well using the standard method by summing up the squared deviations from the means from the provided data. We find that \(S^2_X = 3.5236842105263158\) and \(S^2_Y = 2.410526315789474\). We therefore find the relevant ratio to be \(\frac{S^2_X}{S^2_Y} = \frac{3.5236842105263158}{2.410526315789474} = 1.46179039301\). We now determine whether this value lies within the calculated critical values with \(\alpha = 0.05\), with a little help from Python:
+\[
+(F_{\alpha / 2, m - 1, n - 1}, F_{1 - \alpha / 2, n - 1, m - 1})
+\]
+\[
+(F_{0.05 / 2, 20 - 1, 20 - 1}, F_{1 - 0.05 / 2, 20 - 1, 20 - 1})
+\]
+\[
+(F_{0.025, 19, 19}, F_{0.975, 19, 19})
+\]
+\[
+(0.3958121595432236, 2.5264509335792598)
+\]
+We see that the ratio lies between the critical values, i.e. \(0.3958121595432236 < 1.46179039301 < 2.5264509335792598\), which means that we fail to reject \(H_0\), or there is not a statistically significant difference between the variances of the TAT tests between normal and schizophrenic mothers.
+
+\subsection*{(b)}
+If \(H_0: \sigma^2_X = \sigma^2_Y\) is accepted in part (a), test \(H_0: \mu_X = \mu_Y\) versus \(H_1: \mu_X \neq \mu_Y\). Set \(\alpha\) equal to 0.05.
+\\
+\\
+\(H_0\) was indeed accepted, so we continue. We found that the variances are the same, so we can do a pooled two-sample \(t\)-test. We find that 
+\[
+S^2_p = \frac{(n-1)S^2_X + m-1(S^2_Y)}{n + m - 2} = \frac{(20 - 1) \cdot 3.5236842105263158 + (20 - 1) \cdot 2.410526315789474}{20 + 20 - 2}
+\]
+\[
+= \frac{66.95 + 45.8}{38} = \frac{112.75}{38} = 2.96710526316
+\]
+and also using simple arithmetic that \(\bar{X} = 3.55\) and \(\bar{Y} = 2.1\). We can then plug in to find 
+\[
+t = \frac{\bar{X} - \bar{Y}}{S_p \sqrt{\frac{1}{n} + \frac{1}{m}}} = \frac{3.55 - 2.1}{\sqrt{2.96710526316} \cdot \sqrt{\frac{1}{20} + \frac{1}{20}}} = \frac{1.45}{0.54471141561} = 2.66196000019
+\]
+We can then find the critical values and compare:
+\[
+(-t_{\alpha / 2, n + m - 2}, t_{\alpha / 2, n + m - 2})
+\]
+\[
+(-t_{0.05 / 2, 20 + 20 - 2}, t_{0.05 / 2, 20 + 20 - 2})
+\]
+\[
+(-t_{0.025, 38}, t_{0.025, 38})
+\]
+\[
+(-2.0243941639119694, 2.0243941639119694)
+\]
+As 2.66196000019 is outside of these critical values, we reject \(H_0\), which means that there is a statistically significant difference between the means of the test scores of the two samples.
+\\
+\\
+The code used for both these parts is as follows:
+\begin{verbatim}
+import numpy as np
+from scipy import stats
+
+normal_data = [8, 4, 6, 3, 1, 4, 4, 6, 4, 2, 2, 1, 1, 4, 3, 3, 2, 6, 3, 4]
+schizophrenic_data = [2, 1, 1, 3, 2, 7, 2, 1, 3, 1, 0, 2, 4, 2, 3, 3, 0, 1, 2, 2]
+alpha = 0.05
+normal_df = len(normal_data) - 1
+schizophrenic_df = len(schizophrenic_data) - 1
+
+normal_sample_var = np.var(normal_data, ddof=1)
+schizophrenic_sample_var = np.var(schizophrenic_data, ddof=1)
+
+print(f"{normal_sample_var=}")
+print(f"{schizophrenic_sample_var=}")
+
+f_lower_value = stats.f.ppf(alpha / 2, schizophrenic_df, normal_df)
+f_upper_value = stats.f.ppf(1 - (alpha / 2), schizophrenic_df, normal_df)
+
+print(f"{f_lower_value=}")
+print(f"{f_upper_value=}")
+
+normal_sample_mean = np.mean(normal_data)
+schizophrenic_sample_mean = np.mean(schizophrenic_data)
+
+t_critical_value = stats.t.ppf(0.025,38)
+
+print(f"{normal_sample_mean=}")
+print(f"{schizophrenic_sample_mean=}")
+print(f"{t_critical_value=}")
+\end{verbatim}
+with output:
+\begin{verbatim}
+~/Doc/e/j/S/Problem Sets/EN.625.603.84/Problem Set 7 main !1 ?1 .................................................................... py base 14:28:10
+> python tat_933.py
+normal_sample_var=np.float64(3.5236842105263158)
+schizophrenic_sample_var=np.float64(2.410526315789474)
+f_lower_value=np.float64(0.3958121595432236)
+f_upper_value=np.float64(2.5264509335792598)
+normal_sample_mean=np.float64(3.55)
+schizophrenic_sample_mean=np.float64(2.1)
+t_critical_value=np.float64(-2.0243941639119694)
+\end{verbatim}
+
+\section*{9.5.7}
+
+One of the parameters used in evaluating myocardial function is the end diastolic volume (EDV). The following table shows EDVs recorded for eight persons considered to have normal cardiac function and for six with constrictive pericarditis (204). Would it be correct to use Theorem 9.2.2 to test \(H_0: \mu_X = \mu_Y\)? Answer the question by constructing a 95\% confidence interval for \(\sigma^2_X / \sigma^2_Y\).
+\\
+\\
+We first need to take the sample variances, which we do using Python but we can do normally as well using the standard method by summing up the squared deviations from the means from the provided data. We have \(m = 8\) observations in the normal group and \(n - 6\) observations in the constrictive group. We find that \(S^2_x = 137.35714285714286\) and \(S^2_y = 340.2666666666667\), and that \(\frac{S^2_X}{S^2_Y} = 0.4036749888042991\). For a 95\% confidence interval, we can calculate this as 
+\[
+(\frac{S^2_X}{S^2_Y} \cdot F_{\alpha / 2, m - 1, n - 1}, \frac{S^2_X}{S^2_Y} \cdot F_{1 - \alpha / 2, n - 1, m - 1})
+\]
+\[
+= (0.4036749888042991 \cdot F_{0.05 / 2, 8 - 1, 6 - 1}, 0.4036749888042991 \cdot F_{1 - 0.05 / 2, 6 - 1, 8 - 1})
+\]
+\[
+= (0.4036749888042991 \cdot F_{0.025 , 7, 5}, 0.4036749888042991 \cdot F_{0.975, 5, 7})
+\]
+\[
+= (0.4036749888042991 \cdot F_{0.025 , 7, 5}, 0.4036749888042991 \cdot F_{0.975, 5, 7})
+\]
+\[
+= (0.07637784268635105, 2.1335179268590583)
+\]
+which indicates that the ratio of the sample variances could be 1 as it is included in the confidence interval, which indicates that the variances could be equivalent. This means we cannot conclude that the variances are statistically different and we can therefore indeed use the pooled version of the test as described in 9.2.2.
+\\
+\\
+The code used is as follows:
+\begin{verbatim}
+import numpy as np
+from scipy import stats
+
+normal_data = [62, 60, 78, 62, 49, 67, 80, 48]
+constrictive_data = [24, 56, 42, 74, 44, 28]
+alpha = 0.05
+normal_df = len(normal_data) - 1
+constrictive_df = len(constrictive_data) - 1
+
+normal_sample_var = np.var(normal_data, ddof=1)
+constrictive_sample_var = np.var(constrictive_data, ddof=1)
+
+var_ratio = normal_sample_var / constrictive_sample_var
+
+f_lower_value = stats.f.ppf(alpha / 2 , normal_df, constrictive_df)
+f_upper_value = stats.f.ppf(1 - (alpha / 2), constrictive_df, normal_df)
+
+ci_lower_value = var_ratio * f_lower_value
+ci_upper_value = var_ratio * f_upper_value
+
+print(f"{normal_sample_var=}")
+print(f"{constrictive_sample_var=}")
+print(f"{var_ratio=}")
+
+print(f"{ci_lower_value=}")
+print(f"{ci_upper_value=}")
+\end{verbatim}
+with output:
+\begin{verbatim}
+~/Doc/e/j/S/Problem Sets/EN.625.603.84/Problem Set 7 main !1 ?1 ..................................................................................................... py base 00:41:47
+> python edv_957.py
+normal_sample_var=np.float64(137.35714285714286)
+constrictive_sample_var=np.float64(340.2666666666667)
+var_ratio=np.float64(0.4036749888042991)
+ci_lower_value=np.float64(0.07637784268635105)
+ci_upper_value=np.float64(2.1335179268590583)
+\end{verbatim}
+
+
+% End of the large subsection
+}
+
+\end{document}
