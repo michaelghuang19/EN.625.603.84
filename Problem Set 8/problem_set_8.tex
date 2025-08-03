@@ -299,22 +299,43 @@ b = \frac{\sum_{i=1}^{n} x_i y_i }{\sum_{i=1}^{n} x_i^2}
 \]
 exactly as we had hoped to find.
 
-
 \section*{11.3.2}
-The best straight line through the Massachusetts funding/graduation rate data described in Question 11.2.7
-has the equation y = 81.088+0.412x, where s = 11.78848.
+The best straight line through the Massachusetts funding/graduation rate data described in Question 11.2.7 has the equation y = 81.088+0.412x, where s = 11.78848.
 
 \subsection*{(a)} 
 Construct a 95\% confidence interval for \(\beta_1\).
 \\
 \\
-
+We know by definition that the interval for the confidence interval can be evaluated as 
+\[
+\big[ \hat{\beta_1} - t_{\alpha / 2, n - 2} \cdot \frac{s}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}}, \hat{\beta_1} + t_{\alpha / 2, n - 2} \cdot \frac{s}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}} \big]
+\]
+We are given summary statistics related to \(x_i\), \(\hat{\beta_1} = 0.412\), and \(\alpha = 1 - 0.95 = 0.05\), and we can also intuitively find that \(\bar{x} = \frac{360}{26} = 13.8461538462\) and 
+\[
+\sum_{i=1}^{n}(x_i - \bar{x})^2 = \sum_{i=1}^{n}x_i^2 - \frac{(\sum_{i=1}^{n} x_i)^2}{n}
+\]
+\[
+= 5365.08 - \frac{360^2}{26} = 5365.08 - 4984.61538462 = 380.46461538
+\]
+We can thus substitute to find the confidence interval to be
+\[
+\big[ 0.412 - t_{0.05 / 2, 26 - 2} \cdot \frac{11.78848}{\sqrt{380.46461538}}, 0.412 + t_{0.05 / 2, 26 - 2} \cdot \frac{11.78848}{\sqrt{380.46461538}} \big]
+\]
+\[
+\big[ 0.412 - t_{0.025, 24} \cdot \frac{11.78848}{19.5055021822}, 0.412 + t_{0.025, 24} \cdot \frac{11.78848}{19.5055021822} \big]
+\]
+\[
+\big[ 0.412 - 2.064 \cdot 0.6043669058, 0.412 + 2.064 \cdot 0.6043669058 \big]
+\]
+\[
+\big[-0.83541329357, 1.65941329357\big]
+\]
 
 \subsection*{(b)}
 What does your answer to part (a) imply about the outcome of testing \(H_0: \beta_1 = 0\) versus \(H_1: \beta_1 \neq 0\) at the \(\alpha = 0.05\) level of significance?
 \\
 \\
-
+We find that the confidence interval for \(\beta_1\) includes 0, which means that we don't have statistically significant evidence at \(\alpha = 0.05\) to reject \(H_0\), i.e. there is not enough evidence to say that \(\beta_1\) is not equal to 0.
 
 \section*{11.3.14}
 Construct a 90\% confidence interval for \(\sigma^2\) in the cigarette-consumption/CHD mortality data given in Case Study 11.3.1.
@@ -349,23 +370,160 @@ Regression techniques can be very useful in situationswhere one variable—say, 
 Construct a 95\% confidence interval for \(E(Y | 14.0)\).
 \\
 \\
+We calculate some of the 
+The middle point \(\hat{y}\) for the confidence interval as found by the equation is 
+\[
+\hat{y} = -0.104 + 0.988 \cdot 14.0 = 13.832 - 0.104 = 13.728 
+\]
+and to find the intervals around this value, we know by definition that 
+\[
+w = t_{\alpha / 2, n - 2} \cdot s \sqrt{\frac{1}{n} + \frac{(x - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}
+\]
+\[
+= t_{0.05 / 2, 18 - 2} \cdot 0.202 \cdot \sqrt{\frac{1}{18} + \frac{(14.0 - 15.005555555555556)^2}{96.38944444444444}}
+\]
+\[
+= t_{0.025, 16} \cdot 0.202 \cdot \sqrt{\frac{1}{18} + \frac{1.01114197532}{96.38944444444444}}
+\]
+\[
+= 2.120 \cdot 0.202 \cdot \sqrt{0.06604572883}
+\]
+\[
+= 0.11005495458
+\]
+So the confidence interval would be
+\[
+(13.728 - 0.11005495458, 13.728 + 0.11005495458)
+\]
+\[
+(13.6179450454, 13.8380549546)
+\]
 
 \subsection*{(b)} 
 Construct a 95\% prediction interval for the volume of a child weighing 14.0 kilograms.
 \\
 \\
+Similar to part (a), we find \(\hat{y}, \bar{x} \), and \(\sum_{i=1}^{n} (x_i - \bar{x})^2\). We then use definition for predicting for \(Y = 14.0\) to find the interval values around \(\hat{y}\) to be 
+\[
+w = t_{\alpha / 2, n - 2} \cdot s \cdot \sqrt{1 + \frac{1}{n} + \frac{(x - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}
+\]
+\[
+= t_{0.05 / 2, 18 - 2} \cdot 0.202 \cdot \sqrt{1 + \frac{1}{18} + \frac{(14.0 - 15.005555555555556)^2}{96.38944444444444}}
+\]
+\[
+= t_{0.025, 16} \cdot 0.202 \cdot \sqrt{1 + \frac{1}{18} + \frac{1.01114197532}{96.38944444444444}}
+\]
+\[
+= 2.120 \cdot 0.202 \cdot \sqrt{1.06604572883}
+\]
+\[
+= 0.44215561811
+\]
+So the confidence interval would be 
+\[
+(13.728 - 0.44215561811, 13.728 + 0.44215561811)
+\]
+\[
+(13.2858443819, 14.1701556181)
+\]
+\\
+\\
+The code I used for these two parts is as follows:
+\begin{verbatim}
+import numpy as np
 
+weights = [17.1, 10.5, 13.8, 15.7, 11.9, 10.4, 15.0, 16.0, 17.8, 15.8, 15.1, 12.1, 18.4, 17.1, 16.7, 16.5, 15.1, 15.1]
+volumes = [16.7, 10.4, 13.5, 15.7, 11.6, 10.2, 14.5, 15.8, 17.6, 15.2, 14.8, 11.9, 18.3, 16.7, 16.6, 15.9, 15.1, 14.5]
+
+mean_weight = np.mean(weights)
+weight_squares_sum = np.sum([np.square(weight - mean_weight) for weight in weights])
+
+print(f"{mean_weight=}")
+print(f"{weight_squares_sum=}")
+\end{verbatim}
+with the following output:
+\begin{verbatim}
+~/Doc/e/j/S/Problem Sets/EN.625.603.84/Problem Set 8 problem-set-8 *1 .......................................... py base 15:02:09
+> python volume_11316.py 
+mean_weight=np.float64(15.005555555555556)
+weight_squares_sum=np.float64(96.38944444444444)
+\end{verbatim}
 
 \section*{11.3.17}
 Construct a 95\% confidence interval for \(E(Y | 2.750) \) using the connecting rod data given in Case Study 11.2.1.
 \\
 \\
-
+We know from the table that \(n = 25, \sum_{i=1}^{25} x_i = 66.075, \sum_{i=1}^{25} x_i^2 = 174.692925\), which easily lends to finding \(\bar{x} = 66.075 \div 25 = 2.643\) and 
+\[
+\sum_{i=1}^{25} (x_i - \bar{x})^2 = \sum_{i=1}^{25} x_i^2 - \bar{x}^2 - 2x_i\bar{x}
+\]
+\[
+= \sum_{i=1}^{25} x_i^2 - \sum_{i=1}^{25} \bar{x}^2 - 2\sum_{i=1}^{25} x_i \bar{x}
+\]
+\[
+= \sum_{i=1}^{25} x_i^2 - \sum_{i=1}^{25} \bar{x}^2 - 2\bar{x}\sum_{i=1}^{25} x_i 
+\]
+\[
+= 174.692925 + 25 \cdot 2.643^2 - 2 \cdot 2.643 \cdot 66.075
+\]
+\[
+= 174.692925 + 174.636225 - 349.27245
+\]
+\[
+= 0.0567
+\]
+We can now by definition use the least squarees line found in the case study to find that 
+\[
+\hat{y} = 0.308 + 0.642x 
+\]
+\[
+\hat{y} = 0.308 + 0.642 \cdot 2.750
+\]
+\[
+\hat{y} = 2.0735
+\]
+and that 
+\[
+w = t_{\alpha / 2, n - 2} \cdot s \sqrt{\frac{1}{n} + \frac{(x - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}
+\]
+\[
+= t_{0.05 / 2, 25 - 2} \cdot \sqrt{\frac{\sum_{i=1}^{25}(x_i - \bar{x}^2)}{n-1}} \cdot \sqrt{\frac{1}{25} + \frac{(2.750  - 2.643)^2}{0.0567}}
+\]
+\[
+= t_{0.025, 23} \cdot \sqrt{\frac{0.0567}{25-1}} \cdot \sqrt{\frac{1}{25} + \frac{0.011449}{0.0567}}
+\]
+\[
+= 2.069 \cdot \sqrt{0.0023625} \cdot \sqrt{0.24192239858}
+\]
+\[
+= 0.04946345393
+\]
+So the confidence interval is 
+\[
+(2.0735 - 0.04946345393, 2.0735 + 0.04946345393)
+\]
+\[
+(2.02403654607, 2.12296345393)
+\]
 
 \section*{11.4.12}
 Many people believe that a salary bonus is a reward for good performance. The corporate world may have a different understanding. A random sample of thirty chief executive officers of large capitalization public companies recorded the cash bonus paid, \(x\) (in \$100,000), and the performance of the company, \(y\), as measured by percentage change in company revenues. The following sums resulted. Find the sample coefficient of correlation. What does this study say about the relationship between bonuses and performance?
 \\
 \\
+Given the values, we know that We know by definition that the sample correlation coefficient is 
+\[
+R = \frac{n \sum_{i=1}^{n} X_i Y_i - (\sum_{i=1}^{n} X_i)(\sum_{i=1}^{n}Y_i)}{\sqrt{n \sum_{i=1}^{n} X_i^2 - (\sum_{i=1}^{n} X_i)^2} \sqrt{n\sum_{i=1}^{n}Y_i^2 - (\sum_{i=1}^{n} Y_i)^2}}
+\]
+\[
+= \frac{30 \cdot 7807.36 - 1300.69 \cdot 323}{\sqrt{30 \cdot 86754.6939 - 1300.69^2}\sqrt{30 \cdot 11881 - 323^2}}
+\]
+\[
+= \frac{234220.8 - 420122.87}{\sqrt{2602640.817 - 1691794.4761}\sqrt{356430 - 104329}}
+\]
+\[
+\frac{-185902.07}{954.382701488 \cdot 502.096604251} = -0.38794877283
+\]
+so this implies a slightly weak negative correlation, which means that there is a slight trend of CEOs of companies with poorer performance getting higher bonuses.
 
 \section*{11.4.15}
 A common saying in golf is “You drive for show,but you putt for dough.” To see if there is any truth in this assertion, data for ninety-six top money-winning golfers were examined. For each, their money earnings in 2014 (\(y\), in \$ millions), their average yards per drive (\(v\)), and their average number of putts (\(x\)) were tallied.
