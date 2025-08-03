@@ -23,33 +23,248 @@
 {\Large 
 
 \section*{11.2.1}
-Crickets make their chirping sound by sliding one wing cover very rapidly back and forth over the other. Biologists have long been aware that there is a linear relationship between \(temperature\) and the \(frequency\) with which a cricket chirps, although the slope and y-intercept of the relationship vary from species to species. The following table lists fifteen frequency-temperature observations recorded for the striped ground cricket, \(Nemobius ~ fasciatus ~ fasciatus\) (145). Plot these data and find the equation of the least squares line, y = a+bx. Suppose a cricket of this species is observed to chirp eighteen times per second. What would be the estimated temperature?
+Crickets make their chirping sound by sliding one wing cover very rapidly back and forth over the other. Biologists have long been aware that there is a linear relationship between \(temperature\) and the \(frequency\) with which a cricket chirps, although the slope and y-intercept of the relationship vary from species to species. The following table lists fifteen frequency-temperature observations recorded for the striped ground cricket, \(Nemobius ~ fasciatus ~ fasciatus\) (145). Plot these data and find the equation of the least squares line, \(y = a+bx\). Suppose a cricket of this species is observed to chirp eighteen times per second. What would be the estimated temperature?
 \\
 \\
+We plot the data and line using Python, but can also derive the least squares line with slope \(b\) and intercept \(a\) like so:
+\[
+b = \frac{n\sum_{i=1}^n x_i y_i - (\sum_{i=1}^n x_i) (\sum_{i=1}^{n} y_i)}{n(\sum_{i=1}^n x_i^2) - (\sum_{i=1}^{n} x_i)^2} = \frac{15 \cdot 20,127.47 - 249.8 \cdot 1,200.6}{15 \cdot 4,200.56 - 249.8^2}
+\]
+\[
+= \frac{301912.05 - 299909.88}{63008.4 - 62400.04} = \frac{2002.17}{608.36} = 3.29109408903
+\]
+\[
+a = \frac{\sum_{i=1}^{n} y_i - b \sum_{i=1}^{n}x_i}{n} = \frac{1,200.6 - 3.29109408903 \cdot 249.8}{15}
+\]
+\[
+= \frac{378.48469656}{15} = 25.232313104
+\]
+So the least squares line is \(y = a + bx = 25.232313104 + 3.29109408903x\). So we can estimate the temperature to be 
+\[
+= 25.232313104 + 3.29109408903 \cdot 18 = 84.4719936025
+\]
+\\
+\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=500pt]{cricket_1121.png}
+\end{figure}
+\\
+\\
+\\ \\ \\ \\
+The code I used is as follows:
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
 
+chirps = np.array([20.0, 16.0, 19.8, 18.4, 17.1, 15.5, 14.7, 17.1, 15.4, 16.2, 15.0, 17.2, 16.0, 17.0, 14.4])
+temperatures = np.array([88.6, 71.6, 93.3, 84.3, 80.6, 75.2, 69.7, 82.0, 69.4, 83.3, 79.6, 82.6, 80.6, 83.5, 76.3])
+
+b, a = np.polyfit(chirps, temperatures, deg=1)
+
+y = a + b * chirps 
+
+plt.scatter(chirps, temperatures)
+plt.plot(chirps, y)
+
+plt.xlabel("Chirps per second")
+plt.ylabel("Temperature")
+plt.title("Chirps per second vs Temperature")
+plt.legend()
+plt.grid(True)
+plt.show()\end{verbatim}
 
 \section*{11.2.2}
-The aging of whisky in charred oak barrels brings about a number of chemical changes that enhance its taste and darken its color. The following table shows the change in a whisky's proof as a function of the number of years it is stored (168).
+The aging of whisky in charred oak barrels brings about a number of chemical changes that enhance its taste and darken its color. The following table shows the change in a whisky's proof as a function of the number of years it is stored (168). Graph these
+data and draw in the least squares line.
 \\
 \\
+We plot the data and line using Python, but can also derive the least squares line with slope \(b\) and intercept \(a\) like so:
+\[
+b = \frac{n\sum_{i=1}^n x_i y_i - (\sum_{i=1}^n x_i) (\sum_{i=1}^{n} y_i)}{n(\sum_{i=1}^n x_i^2) - (\sum_{i=1}^{n} x_i)^2} = \frac{10 \cdot 3973.35 - 36.5 \cdot 1070.0}{10 \cdot 204.25 - 36.5^2}
+\]
+\[
+= \frac{39733.5 - 39055}{2042.5 - 1332.25} = \frac{678.5}{710.25} = 0.95529743048
+\]
+\[
+a = \frac{\sum_{i=1}^{n} y_i - b \sum_{i=1}^{n}x_i}{n} = \frac{1070.0 - 0.95529743048 \cdot 36.5}{10}
+\]
+\[
+= \frac{1035.13164379}{10} = 103.513164379
+\]
+So the least squares line is \(y = a + bx = 103.513164379 + 0.95529743048x\) as displayed in the graph.
+\\
+\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=500pt]{whisky_1122.png}
+\end{figure}
+\\
+\\
+The code I used is as follows:
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
 
+ages = np.array([0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8])
+proofs = np.array([104.6, 104.1, 104.4, 105.0, 106.0, 106.8, 107.7, 108.7, 110.6, 112.1])
+
+n = len(ages)
+xy_sum = sum([age * proofs[idx] for idx, age in enumerate(ages)])
+x_sum = ages.sum()
+y_sum = proofs.sum()
+x_squared_sum = sum([age * age for age in ages])
+
+print(f"{n=}")
+print(f"{xy_sum=}")
+print(f"{x_sum=}")
+print(f"{y_sum=}")
+print(f"{x_squared_sum=}")
+
+b, a = np.polyfit(ages, proofs, deg=1)
+
+y = a + b * ages 
+
+plt.scatter(ages, proofs)
+plt.plot(ages, y, label=f"Least Squares Line (y = {a:.2f} + {b:.2f}x)")
+
+plt.xlabel("Age in years")
+plt.ylabel("Proof")
+plt.title("Age in years vs Proof")
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{verbatim}
 
 \section*{11.2.3}
 As water temperature increases, sodium nitrate (NaN\(\text{O}_3\)) becomes more soluble. The following table (110) gives the number of parts of sodium nitrate that dissolve in one hundred parts of water. Calculate the residuals, \(y_1 - \hat{y}_1, \dots, y_9 - \hat{y}_9\), and draw the residual plot. Does it suggest that fitting a straight line through these data would be appropriate?
 \\
 \\
+We can find the corresponding equation for the least squares line and residuals using Python, but we can also derive slope \(b\) and intercept \(a\) like so:
+\[
+b = \frac{n\sum_{i=1}^n x_i y_i - (\sum_{i=1}^n x_i) (\sum_{i=1}^{n} y_i)}{n(\sum_{i=1}^n x_i^2) - (\sum_{i=1}^{n} x_i)^2} = \frac{9 \cdot 24628.6 - 234 \cdot 811.3}{9 \cdot 10144 - 234^2}
+\]
+\[
+= \frac{221657.4 - 189844.2}{91296 - 54756} = \frac{31813.2}{36540} = 0.87064039408
+\]
+\[
+a = \frac{\sum_{i=1}^{n} y_i - b \sum_{i=1}^{n}x_i}{n} = \frac{811.3 - 0.87064039408 \cdot 234}{9}
+\]
+\[
+= \frac{607.570147785}{9} = 67.5077941983
+\]
+So the least squares line is \(y = a + bx = 67.5077941983 + 0.8706403940x\). We can then find the residuals by plugging in each temperature value in as \(x\), and then subtracting the actual value from each, which yields the points as plotted below. We see from the graph that the residuals don't really stay around 0, so the straight line may be the greatest for the data. This is because to have the straight line fit well we'd want the residuals or differences between the modeled data on the line and actual data to be pretty close to 0 across the board. 
+\\
+\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=500pt]{water_1123.png}
+\end{figure}
+\\
+\\
+\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+The code I used is as follows:
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
 
+temperatures = np.array([0, 4, 10, 15, 21, 29, 36, 51, 68])
+parts = np.array([66.7, 71.0, 76.3, 80.6, 85.7, 92.9, 99.4, 113.6, 125.1])
+
+b, a = np.polyfit(temperatures, parts, deg=1)
+
+y = a + b * temperatures 
+
+residuals = parts - y
+
+plt.scatter(temperatures, residuals)
+plt.xlabel("Temperature")
+plt.ylabel("Residuals")
+plt.title("Residual plot for Temperature vs Parts Dissolved")
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{verbatim}
 
 \section*{11.2.7}
 The relationship between school funding and student performance continues to be a hotly debated political and philosophical issue. Typical of the data available are the following figures, showing the per-pupil expenditures and graduation rate for twenty-six randomly chosen districts in Massachusetts. Graph the data and superimpose the least squares line, \(y = a + bx\).
+\\
+\\
+We plot the data and line using Python, but we can also derive the least squares line with slope \(b\) and intercept \(a\) like so:
+\[
+b = \frac{n\sum_{i=1}^n x_i y_i - (\sum_{i=1}^n x_i) (\sum_{i=1}^{n} y_i)}{n(\sum_{i=1}^n x_i^2) - (\sum_{i=1}^{n} x_i)^2} = \frac{26 \cdot 31,402  - 360 \cdot 2,256.6}{26 \cdot 5,365.08 - 360^2}
+\]
+\[
+= \frac{816452 - 812376}{139492.08 - 129600} = \frac{4076}{9892.08} = 0.41204680916
+\]
+\[
+a = \frac{\sum_{i=1}^{n} y_i - b \sum_{i=1}^{n}x_i}{n} = \frac{2,256.6 - 0.41204680916 \cdot 360}{26}
+\]
+\[
+= \frac{2108.2631487}{26} = 81.0870441808
+\]
+So the least squares line is \(y = a + bx = 103.513164379 + 0.41204680916x\) as displayed in the graph.
+\\
+\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=500pt]{school_1127.png}
+\end{figure}
+\\
+\\
+The code I used is as follows:
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
 
+spendings = np.array([10.0, 10.2, 10.2, 10.3, 10.3, 10.8, 11.0, 11.0, 11.2, 11.6, 12.1, 12.3, 12.6, 12.7, 12.9, 13.0, 13.9, 14.5, 14.7, 15.5, 16.4, 17.5, 18.1, 20.8, 22.4, 24.0 ])
+rates = np.array([88.7, 93.2, 95.1, 94.0, 88.3, 89.9, 67.7, 90.2, 95.5, 75.2, 84.6, 85.0, 94.8, 56.1, 54.4, 97.9, 83.0, 94.0, 91.4, 94.2, 97.2, 94.4, 78.6, 87.6, 93.3, 92.3])
+
+b, a = np.polyfit(spendings, rates, deg=1)
+
+y = a + b * spendings 
+
+plt.scatter(spendings, rates)
+plt.plot(spendings, y, label=f"Least Squares Line (y = {a:.2f} + {b:.2f}x)")
+
+plt.xlabel("Spending per pupil, in 1000s")
+plt.ylabel("Graduation rate")
+plt.title("Spending per pupil vs Graduation rate")
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{verbatim}
 
 \section*{11.2.13}
 Prove that a least squares straight line must necessarily
 pass through the point \(( \bar{x}, \bar{y})\).
 \\
 \\
-
+By definition, we know that 
+\[
+a = \frac{\sum_{i=1}^{n} y_i - b \sum_{i=1}^{n}x_i}{n} = \bar{y} - b \bar{x}
+\]
+We can just subtitute in for the least squares straight line quation \(y = a + bx\) and find that 
+\[
+y = a + b\bar{x}
+\]
+\[
+y = \bar{y} - b\bar{x} + b x
+\]
+\[
+y - \bar{y} = b(x - \bar{x})
+\]
+Taking the value for \(x = \bar{x}\):
+\[
+y - \bar{y} = b(\bar{x} - \bar{x})
+\]
+\[
+y - \bar{y} = 0
+\]
+\[
+y = \bar{y}
+\]
+So the corresponding \(y\)-value for \(x = \bar{x}\) is \(\bar{y}\), so when graphed the line must pass therefore pass through the point \((\bar{x}, \bar{y})\).
 
 \section*{11.2.14}
 In some regression situations, there are \(a ~ priori\) reasons for assuming that the \(xy\)-relationship being approximated passes through the origin. If so, the equation to be fit to the \((x_i, y_i)\)'s has the form \(y = bx\). Use the least squares criterion to show that the “best” slope in that case is given by 
@@ -58,6 +273,31 @@ b = \frac{\sum_{i=1}^n x_i y_i}{\sum_{i=1}^{n} x_i^2}
 \]
 \\
 \\
+By definition, the least squares criterion means that we find the best slope by minimizing for 
+\[
+L = \sum_{i=1}^{n} [y_i - (a + bx_i)]^2
+\]
+Since we are going through the origin, then we have intercept \(a = 0\), so we are minimizing 
+\[
+L = \sum_{i=1}^{n} (y_i - bx_i)^2
+\]
+We can find the minimum by differentiating for b and setting the derivative to 0:
+\[
+\frac{dL}{db} = 0 = \sum_{i=1}^{n} 2 \cdot (y_i - bx_i) \cdot -x_i
+\]
+\[
+0 = -2 \sum_{i=1}^{n} x_i(y_i - bx_i)
+\]
+\[
+0 = \sum_{i=1}^{n} x_i y_i - \sum_{i=1}^{n} bx_i^2
+\]
+\[
+b\sum_{i=1}^{n} x_i^2 = \sum_{i=1}^{n} x_i y_i
+\]
+\[
+b = \frac{\sum_{i=1}^{n} x_i y_i }{\sum_{i=1}^{n} x_i^2}
+\]
+exactly as we had hoped to find.
 
 
 \section*{11.3.2}
@@ -80,7 +320,27 @@ What does your answer to part (a) imply about the outcome of testing \(H_0: \bet
 Construct a 90\% confidence interval for \(\sigma^2\) in the cigarette-consumption/CHD mortality data given in Case Study 11.3.1.
 \\
 \\
-
+We know from the conclusion of the case study that the observations satisfy the properties of a simple linear model. We therefore know \(P[\frac{(n-2)S^2}{\chi^2_{1-\alpha / 2, n-2}} \leq \sigma^2 \leq \frac{(n-2)S^2}{\chi^2_{\alpha / 2, n-2}}] = 1 - \alpha\). We are given that \(n=21\) and the corresponding calculations of the relevant sum values for \(x_i\) and \(y_i\) from the table. Let's use this to calculate the confidence interval with \(\alpha = 1 - 0.9 = 0.1\): 
+\[
+\big(\frac{(n-2)S^2}{\chi^2_{1-\alpha / 2, n-2}}, \frac{(n-2)S^2}{\chi^2_{\alpha / 2, n-2}}\big)
+\]
+\[
+\big(\frac{(n-2)(\frac{1}{n-1}(\sum_{i=1}^{n}y_i^2 - \frac{(\sum_{i=1}^{n}y_i)^2}{n}))}{\chi^2_{1-\alpha / 2, n-2}}, \frac{(n-2)(\frac{1}{n-1}(\sum_{i=1}^{n}y_i^2 - \frac{(\sum_{i=1}^{n}y_i)}{n}))}{\chi^2_{\alpha / 2, n-2}}\big)
+\]
+\[
+\big(\frac{(21-2)(\frac{1}{21-1} (529,321.58 - \frac{3042.2^2}{21}))}{\chi^2_{1 - 0.05, 21-2}}, \frac{(21-2)(\frac{1}{21-1} (529,321.58 - \frac{3042.2^2}{21}))}{\chi^2_{0.05, 21-2}}\big)
+\]
+\[
+\big(\frac{19 \cdot (\frac{1}{20} \cdot 88608.206667)}{\chi^2_{0.95, 19}}, \frac{19 \cdot (\frac{1}{20} \cdot 88608.206667)}{\chi^2_{0.05, 19}}\big)
+\]
+Looking up the values in a chi squared table:
+\[
+\big(\frac{84177.7963336}{31.410}, \frac{84177.7963336}{10.117}\big)
+\]
+\[
+\big(2679.96804628, 8320.43059539 \big)
+\]
+which is therefore our 90\% confidence interval for the population variance of the data.
 
 \section*{11.3.16}
 Regression techniques can be very useful in situationswhere one variable—say, \(y\)—is difficult to measure but \(x\) is not. Once such an \(xy\)-relationship has been “calibrated," based on a set of \((x_i, y_i)\)'s, future values of \(Y\) can be easily estimated using \(\hat{\beta}_0 + \hat{\beta}_1x\). Determining the volume of an irregularly shaped object, for example, is often difficult, but weighing that object is likely to be easy. The following table shows the weights (in kilograms) and the volumes (in cubic decimeters) of eighteen children between the ages of five and eight (15). The estimated regression line has the equation \(y = -0.104+0.988x\), where \(s = 0.202\).
