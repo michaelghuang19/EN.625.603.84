@@ -510,7 +510,7 @@ So the confidence interval is
 Many people believe that a salary bonus is a reward for good performance. The corporate world may have a different understanding. A random sample of thirty chief executive officers of large capitalization public companies recorded the cash bonus paid, \(x\) (in \$100,000), and the performance of the company, \(y\), as measured by percentage change in company revenues. The following sums resulted. Find the sample coefficient of correlation. What does this study say about the relationship between bonuses and performance?
 \\
 \\
-Given the values, we know that We know by definition that the sample correlation coefficient is 
+Using the values given and by definition, we can calculate the sample correlation coefficient as 
 \[
 R = \frac{n \sum_{i=1}^{n} X_i Y_i - (\sum_{i=1}^{n} X_i)(\sum_{i=1}^{n}Y_i)}{\sqrt{n \sum_{i=1}^{n} X_i^2 - (\sum_{i=1}^{n} X_i)^2} \sqrt{n\sum_{i=1}^{n}Y_i^2 - (\sum_{i=1}^{n} Y_i)^2}}
 \]
@@ -523,7 +523,7 @@ R = \frac{n \sum_{i=1}^{n} X_i Y_i - (\sum_{i=1}^{n} X_i)(\sum_{i=1}^{n}Y_i)}{\s
 \[
 \frac{-185902.07}{954.382701488 \cdot 502.096604251} = -0.38794877283
 \]
-so this implies a slightly weak negative correlation, which means that there is a slight trend of CEOs of companies with poorer performance getting higher bonuses.
+so this implies a slightly weak negative correlation, which means that there is a slight trend of CEOs of companies with poorer performance getting higher bonuses. 
 
 \section*{11.4.15}
 A common saying in golf is “You drive for show,but you putt for dough.” To see if there is any truth in this assertion, data for ninety-six top money-winning golfers were examined. For each, their money earnings in 2014 (\(y\), in \$ millions), their average yards per drive (\(v\)), and their average number of putts (\(x\)) were tallied.
@@ -533,13 +533,49 @@ Show that the correlation coefficient between the
 putting average and earnings reveal a slightly stronger relationship than that for driving and earnings.
 \\
 \\
-
+Using the values given and by definition, we can calculate the sample correlation coefficient as 
+\[
+R = \frac{n \sum_{i=1}^{n} X_i Y_i - (\sum_{i=1}^{n} X_i)(\sum_{i=1}^{n}Y_i)}{\sqrt{n \sum_{i=1}^{n} X_i^2 - (\sum_{i=1}^{n} X_i)^2} \sqrt{n\sum_{i=1}^{n}Y_i^2 - (\sum_{i=1}^{n} Y_i)^2}}
+\]
+Let's compute this for each value. Starting with driving average first:
+\[
+r_{vy} = \frac{96 \cdot 67658.00 - 27989 \cdot 230.87}{\sqrt{96 \cdot 8167723 - 27989^2} \sqrt{96 \cdot 734.32 - 230.87^2}}
+\]
+\[
+= \frac{6495168 - 6461820.43}{\sqrt{717287} \sqrt{17193.7631}}
+\]
+\[
+= \frac{33347.57}{846.927978048 \cdot 131.124990372}
+\]
+\[
+= 0.30028403545
+\]
+And now for putting average:
+\[
+r_{xy} = \frac{96 \cdot 406.37 - 169.31 \cdot 230.87}{\sqrt{96 \cdot 298.64 - 169.31^2} \sqrt{96 \cdot 734.32 - 230.87^2}}
+\]
+\[
+= \frac{39011.52 - 39088.5997}{\sqrt{3.5639} \sqrt{17193.7631}}
+\]
+\[
+= \frac{-77.0797}{1.88782944145 \cdot 131.124990372}
+\]
+\[
+= -0.31138077237
+\]
+As we sought to find, there is a slightly stronger relationship for putting, as shown by how 0.31138077237 is barely greater than 0.30028403545. The former has a negative relationship, but the strength is measured by the absolute value.
 
 \subsection*{(b)} 
 For each correlation \(r\), compute \(r^2\) to show that neither the \(v\) nor the \(x\) variable alone is a good predictor of earnings.
 \\
 \\
-
+\[
+r^2_{vy} = r_{vy}^2 = 0.30028403545^2 = 0.09017050194
+\]
+\[
+r^2_{xy} = r_{xy}^2 = -0.31138077237^2 = 0.0969579854
+\]
+Both of these values are fairly low -- interpreting this means that just \%9.017050194 and \%9.69579854 of the variance in earnings can be explained by driving average and putting average alone, respectively.
 
 % End of the large subsection
 }
