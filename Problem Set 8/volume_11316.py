@@ -1,0 +1,10 @@
+import numpy as np
+
+weights = [17.1, 10.5, 13.8, 15.7, 11.9, 10.4, 15.0, 16.0, 17.8, 15.8, 15.1, 12.1, 18.4, 17.1, 16.7, 16.5, 15.1, 15.1]
+volumes = [16.7, 10.4, 13.5, 15.7, 11.6, 10.2, 14.5, 15.8, 17.6, 15.2, 14.8, 11.9, 18.3, 16.7, 16.6, 15.9, 15.1, 14.5]
+
+mean_weight = np.mean(weights)
+weight_squares_sum = np.sum([np.square(weight - mean_weight) for weight in weights])
+
+print(f"{mean_weight=}")
+print(f"{weight_squares_sum=}")
